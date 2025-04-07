@@ -13,10 +13,12 @@
     require('controllers/home.php');
     require('controllers/shares.php');
     require('controllers/users.php');
+    require('controllers/borrow.php');
 
     require('models/home.php');
     require('models/share.php');
     require('models/user.php');
+    require('models/borrow.php');
 
 
 

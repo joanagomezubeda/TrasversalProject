@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/style.css">
     <script src="<?php echo ROOT_PATH; ?>assets/js/bootstrap.js"></script>
     <link rel="icon" href="<?php echo ROOT_PATH; ?>assets/images/icon.png" type="image/x-icon">
+    <!--    Libreria de iconos de bootstrap  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
 
 
 </head>
@@ -39,10 +42,10 @@
                     <div class=" d-lg-none mt-3">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Explore</a>
+                                <a href="<?php echo ROOT_URL;?>" class="nav-link">Explore</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Borrow</a>
+                                <a href="<?php echo ROOT_URL;?>borrow/index" class="nav-link">Borrow</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">My Library</a>
@@ -92,22 +95,21 @@
         </div>
 
         <nav>
+            <!--    Variable para sacar en qué vista estamos  -->
+            <?php $controllerName = strtolower(get_class($this));?>
+
             <ul class="list-unstyled">
-                <div class="d-flex mx-5 mt-4 bg-white shadow p-2 rounded-3">
-                    <img src="<?php echo ROOT_URL;?>assets/images/explore.png" alt="Icon for explore nav" class="object-fit-cover">
-                    <li><a href="#" class="ms-2 fw-semibold">Explore</a></li>
+                <div class="d-flex mx-5 mt-4 <?php echo ($controllerName == 'home') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                    <li><a href="<?php echo ROOT_URL;?>" class="ms-2 fw-semibold"><i class="bi bi-bookmark-heart-fill fs-5 me-2"></i>Explore</a></li>
                 </div>
-                <div class="d-flex mx-5 mt-4">
-                    <img src="<?php echo ROOT_URL;?>assets/images/lupa.png" alt="Icon for borrow nav" class="object-fit-cover">
-                    <li><a href="#" class="ms-2 fw-semibold">Borrow</a></li>
+                <div class="d-flex mx-5 mt-4 <?php echo ($controllerName == 'borrow') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                    <li><a href="<?php echo ROOT_URL;?>borrow" class="ms-2 fw-semibold"><i class="bi bi-search-heart-fill fs-5 me-2"></i>Borrow</a></li>
                 </div>
-                <div class="d-flex mx-5 mt-4">
-                    <img src="<?php echo ROOT_URL;?>assets/images/myLibrary.png" alt="Icon for borrow nav" class="object-fit-cover">
-                    <li><a href="#" class="ms-2 fw-semibold">My library</a></li>
+                <div class="d-flex mx-5 mt-4 <?php echo ($controllerName == 'myLibrary') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                    <li><a href="#" class="ms-2 fw-semibold"><i class="bi bi-suit-heart-fill fs-5 me-2"></i>My library</a></li>
                 </div>
-                <div class="d-flex mx-5 mt-4">
-                    <img src="<?php echo ROOT_URL;?>assets/images/community.png" alt="Icon for borrow nav" class="object-fit-cover">
-                    <li><a href="#" class="ms-2 fw-semibold">Community</a></li>
+                <div class="d-flex mx-5 mt-4 <?php echo ($controllerName == 'community') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                    <li><a href="#" class="ms-2 fw-semibold"><i class="bi bi-chat-square-heart-fill fs-5 me-2"></i>Community</a></li>
                 </div>
 
             </ul>
@@ -117,7 +119,12 @@
     <div class="mt-auto mx-5 mb-4">
         <ul class="list-unstyled">
             <?php if(isset($_SESSION['is_logged_in'])): ?>
-                <li><a href="<?php echo ROOT_PATH;?>users/logout" class="ms-2 fw-semibold">Logout</a></li>
+                <li>
+                    <a href="<?php echo ROOT_PATH;?>users/logout" class=" fw-semibold">
+                        <i class="bi bi-person-dash fs-4 border-black"></i>
+                        Logout
+                    </a>
+                </li>
             <?php else: ?>
                 <li><a class="mx-2 fw-semibold" href="<?php echo ROOT_PATH;?>users/register">Register</a></li>
                 <li><a class="mx-2 fw-semibold" href="<?php echo ROOT_PATH;?>users/login">Login</a></li>
@@ -139,8 +146,8 @@
     </div>
 </div>
 
-<footer class="d-flex justify-content-center mt-4 pt-3">
-    <p>&copy 2025 Joana</p>
-</footer>
+<!--<footer class="d-flex justify-content-center mt-4 pt-3">-->
+<!--    <p>&copy 2025 Joana</p>-->
+<!--</footer>-->
 </body>
 </html>

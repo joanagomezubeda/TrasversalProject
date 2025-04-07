@@ -1,7 +1,7 @@
 <!--Las cuatro tarjetas principales-->
     <div class="col-12 col-lg-6 mb-4">
         <div class="shadow rounded-4 bg-color d-flex py-3">
-            <img src="<?php ROOT_URL;?>assets/images/prince.png" alt="" class="img-fluid img-cover rounded-2 ms-4" style="width: 150px;">
+            <img src="<?php ROOT_URL;?>assets/images/prince.png" alt="" class="img-fluid img-cover rounded-2 ms-4">
             <div class="mx-4 text-justify">
                 <h5 class="fw-bold">Discover fantasy books!</h5>
                 <p>Fantasy literature is literature set in an imaginary universe, often but not always without any locations, events, or people from the real world.</p>
@@ -12,7 +12,7 @@
 
     <div class="col-12 col-lg-6 mb-4">
         <div class="shadow rounded-4 bg-color d-flex py-3">
-            <img src="<?php ROOT_URL;?>assets/images/prince.png" alt="" class="img-fluid img-cover rounded-2 ms-4" style="width: 150px;">
+            <img src="<?php ROOT_URL;?>assets/images/prince.png" alt="" class="img-fluid img-cover rounded-2 ms-4">
             <div class="mx-4 text-justify">
                 <h5 class="fw-bold">Discover fantasy books!</h5>
                 <p>Fantasy literature is literature set in an imaginary universe, often but not always without any locations, events, or people from the real world.</p>
@@ -23,7 +23,7 @@
 
     <div class="col-12 col-lg-6 mb-4">
         <div class="shadow rounded-4 bg-color d-flex py-3">
-            <img src="<?php ROOT_URL;?>assets/images/prince.png" alt="" class="img-fluid img-cover rounded-2 ms-4" style="width: 150px;">
+            <img src="<?php ROOT_URL;?>assets/images/prince.png" alt="" class="img-fluid img-cover rounded-2 ms-4">
             <div class="mx-4 text-justify">
                 <h5 class="fw-bold">Discover fantasy books!</h5>
                 <p>Fantasy literature is literature set in an imaginary universe, often but not always without any locations, events, or people from the real world.</p>
@@ -34,7 +34,7 @@
 
     <div class="col-12 col-lg-6 mb-4">
         <div class="shadow rounded-4 bg-color d-flex py-3">
-            <img src="<?php ROOT_URL;?>assets/images/prince.png" alt="" class="img-fluid img-cover rounded-2 ms-4" style="width: 150px;">
+            <img src="<?php ROOT_URL;?>assets/images/prince.png" alt="" class="img-fluid img-cover rounded-2 ms-4">
             <div class="mx-4 text-justify">
                 <h5 class="fw-bold">Discover fantasy books!</h5>
                 <p>Fantasy literature is literature set in an imaginary universe, often but not always without any locations, events, or people from the real world.</p>

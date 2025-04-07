@@ -98,6 +98,18 @@ body{
     text-align: justify;
 }
 
+.img-borrow{
+    width: 100% !important;
+    height: 20rem !important;
+}
+
+.text-clamp{
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+
 .img-cover{
     object-fit: cover;
     width: 40%;
@@ -140,6 +152,7 @@ ul img{
     width: 1.5rem;
     height: auto;
 }
+
 
 
 @media (max-width: 768px){

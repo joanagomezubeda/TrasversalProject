@@ -19,6 +19,7 @@
         {
             $view = 'views/'. get_class($this). '/' . $this->action. '.php';
             if ($fullview){
+                $controllerName = strtolower(get_class($this));
                 require('views/main.php');
             } else {
                 require($view);
