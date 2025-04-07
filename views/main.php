@@ -137,9 +137,9 @@
 <aside class="asideRight">
     <h1>adios</h1>
 </aside>
-<div class="container">
+<div class="container body-animation">
     <div class="row d-flex justify-content-center mt-5">
-        <div class="row">
+        <div class="row ">
             <?php Messages::display(); ?>
             <?php require ($view); ?>
         </div>

@@ -153,6 +153,15 @@ ul img{
     height: auto;
 }
 
+.body-animation{
+    animation: bodyAnimation 0.3s ease-in-out;
+}
+
+@keyframes bodyAnimation {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
 
 
 @media (max-width: 768px){

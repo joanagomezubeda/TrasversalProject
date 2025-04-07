@@ -1,4 +1,4 @@
-<div class="row d-flex justify-content-sm-center">
+<div class="row d-flex justify-content-sm-center justify-content-lg-start">
     <?php foreach ($viewmodel as $item): ?>
         <div class="col-md-9 col-lg-6 col-xl-6 col-xxl-4 mb-4">
             <div class="shadow rounded-4 bg-color py-4 px-4">
