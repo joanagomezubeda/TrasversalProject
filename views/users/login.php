@@ -3,6 +3,7 @@
         <div class="w-50 py-5">
             <h1 class="text-center mb-4 fw-bold">Log In!</h1>
             <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
+                <?php Messages::display(); ?>
                 <div class="form-group  mt-3">
                     <label for="email">Email</label>
                     <input type="email" placeholder="username@gmail.com" name="email" class="form-control form-border" id="email">

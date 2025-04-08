@@ -8,7 +8,7 @@
                 <p class="text-clamp"><?php echo $item['description'];?></p>
                 <div class="d-flex justify-content-center gap-4 flex-sm-row flex-column">
                     <button class="btn btn-primary-color shadow w-50 w-sm-100">Borrow</button>
-                    <button class="btn btn-primary-color shadow w-50 w-sm-100">See More</button>
+                    <a class="btn btn-primary-color shadow w-50 w-sm-100" href="<?php echo ROOT_PATH; ?>borrow/show/<?=$item['ID']?>">See More</a>
                 </div>
             </div>
         </div>

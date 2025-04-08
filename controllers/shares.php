@@ -12,7 +12,6 @@
                 header('Location: '.ROOT_URL.'shares');
             }
 
-
             $viewmodel = new ShareModel();
             $this->ReturnView($viewmodel->add(), true);
         }

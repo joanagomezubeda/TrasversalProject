@@ -49,7 +49,7 @@
     <div class="bg-color p-3 rounded-4 shadow ">
         <h3 class="fw-bold">Discover Our Book Lending Service</h3>
         <p>Explore a wide range of genres and borrow books easily from our extensive collection. Enjoy the convenience of reading your favorite books from the comfort of your home.</p>
-        <a class="btn btn-primary-color shadow rounded-2 w-25 py-2">Learn More</a>
+        <a class="btn btn-primary-color shadow rounded-2 py-2 col-xl-3 col-md-12 col-12">Learn More</a>
     </div>
 </div>
 
@@ -60,9 +60,11 @@
         <div class="row">
             <?php foreach ($viewmodel as $item): ?>
                 <div class="col-12 col-md-6 col-lg-3 mb-4 ">
-                    <img src="<?php echo ROOT_URL.'assets/'.$item['image']; ?>"
-                         alt=""
-                         class="w-100 object-fit-cover rounded-3 static-height">
+                    <a href="<?php echo ROOT_PATH?>borrow/show/<?php echo $item['ID']?>">
+                        <img src="<?php echo ROOT_URL.'assets/'.$item['image']; ?>"
+                             alt=""
+                             class="w-100 object-fit-cover rounded-3 static-height">
+                    </a>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -82,6 +84,6 @@
         <p>Welcome to the Community Zone, where book lovers like you come together to share their thoughts,
             ideas, and experiences about their favorite reads. This is more than just a section of our website—it's a
             vibrant social space for bibliophiles to connect, explore, and inspire one another.</p>
-        <a class="btn btn-primary-color w-25">Learn More</a>
+        <a class="btn btn-primary-color col-xl-3 col-md-12 col-12">Learn More</a>
     </div>
 </div>

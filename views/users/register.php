@@ -4,6 +4,7 @@
         <div class="w-50 py-5">
             <h1 class="text-center mb-4 fw-bold">Register User!</h1>
             <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
+                <?php Messages::display(); ?>
                 <div class="form-group">
                     <label for="completeName">Complete Name</label>
                     <input type="text" placeholder="John Doe" name="completeName" class="form-control form-border" id="completeName">

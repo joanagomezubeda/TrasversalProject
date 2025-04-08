@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/style.css">
     <script src="<?php echo ROOT_PATH; ?>assets/js/bootstrap.js"></script>
     <link rel="icon" href="<?php echo ROOT_PATH; ?>assets/images/icon.png" type="image/x-icon">
-    <!--    Libreria de iconos de bootstrap  -->
+
+    <!--    Library with pretties icons  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 
@@ -27,17 +28,6 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <?php if(!isset($_SESSION['is_logged_in'])): ?>
-                        <li class="nav-item active">
-                            <a class="nav-link" aria-current="page" href="<?php echo ROOT_PATH;?>users/login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="<?php echo ROOT_PATH;?>users/register">Register</a>
-                        </li>
-                    <?php endif; ?>
-                </ul>
-
                 <?php if(isset($_SESSION['is_logged_in'])): ?>
                     <div class=" d-lg-none mt-3">
                         <ul class="navbar-nav">
@@ -63,7 +53,7 @@
                     </div>
                 <?php endif; ?>
 
-                <form class="d-flex" role="search">
+                <form class="d-flex ms-auto" role="search">
                     <input class="form-control me-2 primary-border-color " type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-primary-outline" type="submit">Search</button>
                 </form>
@@ -73,78 +63,89 @@
     </nav>
 </header>
 
+<!-- Aside left with navigation and the user card-->
 
-<aside class="asideLeft d-none d-lg-flex flex-column">
-    <div class="flex-grow-1">
-        <div class="userDiv">
-            <?php if(isset($_SESSION['is_logged_in'])): ?>
-                <div class="bg-white shadow rounded-4 asideHeight m-5 w-75 align-content-center">
-                    <a class="mx-4 my-1 d-flex text-decoration-none a-color" href="#">
-                        <?php if (isset($_SESSION['user_data']['image'])): ?>
-                            <img src="<?php echo ROOT_URL.'assets/'.$_SESSION['user_data']['image'] ?>" alt="Profile image" class="profile-image rounded-circle object-fit-cover img-fluid">
-                        <?php else: ?>
-                            <img src="<?php echo ROOT_URL;?>assets/images/defaultProfile.jpg" alt="Default profile icon" class="profile-image rounded-circle object-fit-cover img-fluid">
-                        <?php endif ?>
-                        <div class="text-wrap">
-                            <p class="mx-3 fw-bold without-margin">Welcome <?php echo $_SESSION['user_data']['name']; ?></p>
-                            <p class="mx-3 without-margin"><?php echo $_SESSION['user_data']['email']; ?></p>
-                        </div>
-                    </a>
-                </div>
-            <?php endif; ?>
+<aside class="asideLeft d-lg-flex flex-column ">
+    <div class="d-sm-none d-lg-flex">
+        <div class="flex-grow-1">
+            <div class="userDiv">
+                <?php if(isset($_SESSION['is_logged_in'])): ?>
+                    <div class="bg-white shadow rounded-4 asideHeight m-5 w-75 align-content-center ">
+                        <a class="mx-4 my-1 d-flex text-decoration-none a-color justify-content-center" href="#">
+                            <?php if (isset($_SESSION['user_data']['image'])): ?>
+                                <img src="<?php echo ROOT_URL.'assets/'.$_SESSION['user_data']['image'] ?>" alt="Profile image" class="profile-image rounded-circle object-fit-cover img-fluid">
+                            <?php else: ?>
+                                <img src="<?php echo ROOT_URL;?>assets/images/defaultProfile.jpg" alt="Default profile icon" class="profile-image rounded-circle object-fit-cover img-fluid">
+                            <?php endif ?>
+                            <div class="text-wrap">
+                                <p class="mx-3 fw-bold without-margin">Welcome <?php echo $_SESSION['user_data']['name']; ?></p>
+                                <p class="mx-3 without-margin"><?php echo $_SESSION['user_data']['email']; ?></p>
+                            </div>
+                        </a>
+                    </div>
+                <?php endif; ?>
+            </div>
+
+            <nav class="userNav">
+                <!--    Var to get in what view. With that var we put some div classes to look pretty -->
+                <?php $viewName = get_class($this); ?>
+
+                <ul class="list-unstyled">
+                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'Home') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                        <li><a href="<?php echo ROOT_URL;?>" class="ms-2 fw-semibold"><i class="bi bi-bookmark-heart-fill fs-5 me-2"></i>Explore</a></li>
+                    </div>
+                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'Borrow') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                        <li><a href="<?php echo ROOT_URL;?>borrow" class="ms-2 fw-semibold"><i class="bi bi-search-heart-fill fs-5 me-2"></i>Borrow</a></li>
+                    </div>
+                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'MyLibrary') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                        <li><a href="#" class="ms-2 fw-semibold"><i class="bi bi-suit-heart-fill fs-5 me-2"></i>My library</a></li>
+                    </div>
+                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'Community') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                        <li><a href="#" class="ms-2 fw-semibold"><i class="bi bi-chat-square-heart-fill fs-5 me-2"></i>Community</a></li>
+                    </div>
+
+                </ul>
+            </nav>
         </div>
+    </div>
 
-        <nav>
-            <!--    Variable para sacar en qué vista estamos  -->
-            <?php $controllerName = strtolower(get_class($this));?>
-
+        <div class="mt-auto mx-5 mb-4 d-sm-none d-lg-block">
             <ul class="list-unstyled">
-                <div class="d-flex mx-5 mt-4 <?php echo ($controllerName == 'home') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
-                    <li><a href="<?php echo ROOT_URL;?>" class="ms-2 fw-semibold"><i class="bi bi-bookmark-heart-fill fs-5 me-2"></i>Explore</a></li>
-                </div>
-                <div class="d-flex mx-5 mt-4 <?php echo ($controllerName == 'borrow') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
-                    <li><a href="<?php echo ROOT_URL;?>borrow" class="ms-2 fw-semibold"><i class="bi bi-search-heart-fill fs-5 me-2"></i>Borrow</a></li>
-                </div>
-                <div class="d-flex mx-5 mt-4 <?php echo ($controllerName == 'myLibrary') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
-                    <li><a href="#" class="ms-2 fw-semibold"><i class="bi bi-suit-heart-fill fs-5 me-2"></i>My library</a></li>
-                </div>
-                <div class="d-flex mx-5 mt-4 <?php echo ($controllerName == 'community') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
-                    <li><a href="#" class="ms-2 fw-semibold"><i class="bi bi-chat-square-heart-fill fs-5 me-2"></i>Community</a></li>
-                </div>
-
+                <?php if(isset($_SESSION['is_logged_in'])): ?>
+                    <li>
+                        <a href="<?php echo ROOT_PATH;?>users/logout" class=" fw-semibold">
+                            <i class="bi bi-person-dash fs-4 border-black"></i>
+                            Logout
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li><a class="mx-2 fw-semibold" href="<?php echo ROOT_PATH;?>users/register"><i class="bi bi-person-add fs-4 me-1"></i>Register</a></li>
+                    <li><a class="mx-2 fw-semibold" href="<?php echo ROOT_PATH;?>users/login"><i class="bi bi-person fs-4 me-1"></i>Login</a></li>
+                <?php endif ?>
             </ul>
-        </nav>
-    </div>
-
-    <div class="mt-auto mx-5 mb-4">
-        <ul class="list-unstyled">
-            <?php if(isset($_SESSION['is_logged_in'])): ?>
-                <li>
-                    <a href="<?php echo ROOT_PATH;?>users/logout" class=" fw-semibold">
-                        <i class="bi bi-person-dash fs-4 border-black"></i>
-                        Logout
-                    </a>
-                </li>
-            <?php else: ?>
-                <li><a class="mx-2 fw-semibold" href="<?php echo ROOT_PATH;?>users/register">Register</a></li>
-                <li><a class="mx-2 fw-semibold" href="<?php echo ROOT_PATH;?>users/login">Login</a></li>
-            <?php endif ?>
-        </ul>
-    </div>
+        </div>
 </aside>
 
+<!-- Aside right with the last books you save on your library -->
 
 <aside class="asideRight">
-    <h1>adios</h1>
+    <div class="d-sm-none d-lg-block">
+        <h1>a</h1>
+    </div>
 </aside>
-<div class="container body-animation">
-    <div class="row d-flex justify-content-center mt-5">
-        <div class="row ">
-            <?php Messages::display(); ?>
-            <?php require ($view); ?>
+
+<!-- Main with the views  -->
+
+<main>
+    <div class="container body-animation">
+        <div class="row d-flex justify-content-center mt-5">
+            <div class="row ">
+                <?php require ($view); ?>
+            </div>
         </div>
     </div>
-</div>
+</main>
+
 
 <!--<footer class="d-flex justify-content-center mt-4 pt-3">-->
 <!--    <p>&copy 2025 Joana</p>-->
