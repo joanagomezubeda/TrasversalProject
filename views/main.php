@@ -11,7 +11,7 @@
     <script src="<?php echo ROOT_PATH; ?>assets/js/bootstrap.js"></script>
     <link rel="icon" href="<?php echo ROOT_PATH; ?>assets/images/icon.png" type="image/x-icon">
 
-    <!--    Library with pretties icons  -->
+    <!--    Library with pretty icons  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 
@@ -26,7 +26,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
+            <!-- Navbar for mobiles -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <?php if(isset($_SESSION['is_logged_in'])): ?>
                     <div class=" d-lg-none mt-3">
@@ -71,9 +71,9 @@
             <div class="userDiv">
                 <?php if(isset($_SESSION['is_logged_in'])): ?>
                     <div class="bg-white shadow rounded-4 asideHeight m-5 w-75 align-content-center ">
-                        <a class="mx-4 my-1 d-flex text-decoration-none a-color justify-content-center" href="#">
+                        <a class="mx-4 my-1 d-flex text-decoration-none a-color justify-content-center" href="<?php echo ROOT_URL?>users/profile/<?php echo $_SESSION['user_data']['id'];?>">
                             <?php if (isset($_SESSION['user_data']['image'])): ?>
-                                <img src="<?php echo ROOT_URL.'assets/'.$_SESSION['user_data']['image'] ?>" alt="Profile image" class="profile-image rounded-circle object-fit-cover img-fluid">
+                                <img src="<?php echo ROOT_URL.$_SESSION['user_data']['image'] ?>" alt="Profile image" class="profile-image rounded-circle object-fit-cover img-fluid">
                             <?php else: ?>
                                 <img src="<?php echo ROOT_URL;?>assets/images/defaultProfile.jpg" alt="Default profile icon" class="profile-image rounded-circle object-fit-cover img-fluid">
                             <?php endif ?>
@@ -88,19 +88,19 @@
 
             <nav class="userNav">
                 <!--    Var to get in what view. With that var we put some div classes to look pretty -->
-                <?php $viewName = get_class($this); ?>
+                <?php $viewName = strtolower(get_class($this)); ?>
 
                 <ul class="list-unstyled">
-                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'Home') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'home') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
                         <li><a href="<?php echo ROOT_URL;?>" class="ms-2 fw-semibold"><i class="bi bi-bookmark-heart-fill fs-5 me-2"></i>Explore</a></li>
                     </div>
-                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'Borrow') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'borrow') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
                         <li><a href="<?php echo ROOT_URL;?>borrow" class="ms-2 fw-semibold"><i class="bi bi-search-heart-fill fs-5 me-2"></i>Borrow</a></li>
                     </div>
-                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'MyLibrary') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'myLibrary') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
                         <li><a href="#" class="ms-2 fw-semibold"><i class="bi bi-suit-heart-fill fs-5 me-2"></i>My library</a></li>
                     </div>
-                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'Community') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'community') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
                         <li><a href="#" class="ms-2 fw-semibold"><i class="bi bi-chat-square-heart-fill fs-5 me-2"></i>Community</a></li>
                     </div>
 
@@ -130,7 +130,9 @@
 
 <aside class="asideRight">
     <div class="d-sm-none d-lg-block">
-        <h1>a</h1>
+        <?php if(isset($_SESSION['is_logged_in'])): ?>
+           <h1>a</h1>
+        <?php endif ?>
     </div>
 </aside>
 

@@ -31,9 +31,9 @@
     </div>
 </div>
 
-<!-- Carrousel of photos of related books.
+<!-- Carrousel of photos about related books.
     If there are no related books,
-    it won't see anything even the h2 of "Related Books"  -->
+    it won't see anything. Even the h2 of "Related Books"  -->
 
 <div id="carouselOfBooks" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner" data-bs-interval="10000">

@@ -21,5 +21,23 @@
             // Redirect
             header('Location:'.ROOT_URL);
         }
+
+        protected function profile(){
+            $id = $this->request['id'];
+            $viewmodel = new UserModel();
+            $this->returnView($viewmodel->profile($id), true);
+        }
+
+        protected function update()
+        {
+            if (!isset($_SESSION['is_logged_in'])) {
+                header('Location: ' . ROOT_URL);
+            }
+            $viewmodel = new UserModel();
+            $id = $this->request['id'];
+            $this->returnView($viewmodel->update($id), true);
+        }
+
+
     }
 ?>
