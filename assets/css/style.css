@@ -126,6 +126,7 @@ body{
 
 .profile-image{
     width: 2.5rem !important;
+    height: 2.5rem !important;
 }
 
 .a-color{
@@ -181,10 +182,16 @@ ul img{
     height: 21rem;
 }
 
-.img-comments{
+.img-publication{
     width: 100% !important;
     height: 10rem !important;
 }
+
+.img-comments{
+    width: 50% !important;
+    height: 25rem !important;
+}
+
 
 .input-type-file{
     display: none !important;

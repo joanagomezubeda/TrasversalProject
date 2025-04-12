@@ -9,4 +9,5 @@
     define("ROOT_PATH", "/trasversalProject/");
     define("ROOT_URL", "http://localhost:8080/trasversalProject/");
 
+
 ?>

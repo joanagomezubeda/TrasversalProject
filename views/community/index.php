@@ -1,3 +1,4 @@
+<?php Messages::display(); ?>
 <?php if (isset($_SESSION['is_logged_in'])):?>
     <div class="bg-color p-3 shadow rounded-3">
         <form action="<?php  $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
@@ -26,7 +27,9 @@
                 </div>
                 <div class="mt-4 ms-2">
                     <p class="text-clamp"><?php echo $item['description'] ?></p>
-                    <img src="<?php echo ROOT_URL.$item['publication_image'] ?>" class="img-fluid img-comments object-fit-cover" alt="<?php echo $item['name']?>">
+                    <?php if(ROOT_URL.$item['publication_image'] != 'http://localhost:8080/trasversalProject/assets/communityImages/'):?>
+                        <img src="<?php echo ROOT_URL.$item['publication_image'] ?>" class="img-fluid img-publication object-fit-cover rounded-3" alt="<?php echo $item['name']?>">
+                    <?php endif;?>
                 </div>
             </div>
         </a>
@@ -34,3 +37,11 @@
     <?php endforeach; ?>
 
 </div>
+
+
+<script>
+    // Verifica si hay un mensaje de error en la sesión
+    <?php if (isset($_SESSION['message']) && $_SESSION['message']['type'] == 'error') { ?>
+    console.error('Error: <?php echo addslashes($_SESSION['message']['text']); ?>');
+    <?php } ?>
+</script>

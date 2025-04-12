@@ -28,7 +28,7 @@
         protected function delete()
         {
             if(!isset($_SESSION['is_logged_in'])){
-                header('Location: '.ROOT_URL.'shares');
+                header('Location: '.ROOT_URL);
             }
 
             $id = $this->request['id'];

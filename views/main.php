@@ -73,7 +73,7 @@
                     <div class="bg-white shadow rounded-4 asideHeight m-5 w-75 align-content-center ">
                         <a class="mx-4 my-1 d-flex text-decoration-none a-color justify-content-center" href="<?php echo ROOT_URL?>users/profile/<?php echo $_SESSION['user_data']['id'];?>">
                             <?php if (isset($_SESSION['user_data']['image'])): ?>
-                                <img src="<?php echo ROOT_URL.$_SESSION['user_data']['image'] ?>" alt="Profile image" class="profile-image rounded-circle object-fit-cover img-fluid">
+                                <img src="<?php echo ROOT_URL.$_SESSION['user_data']['image'] ?>" alt="Profile image" class="profile-image rounded-circle object-fit-cover img-fluid mt-1">
                             <?php else: ?>
                                 <img src="<?php echo ROOT_URL;?>assets/images/defaultProfile.jpg" alt="Default profile icon" class="profile-image rounded-circle object-fit-cover img-fluid">
                             <?php endif ?>
