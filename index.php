@@ -3,23 +3,22 @@
     // Start Session
     session_start();
 
-    require('config.php');
+    require_once('config.php');
 
-    require('classes/Messages.php');
-    require('classes/Bootstrap.php');
-    require('classes/Controller.php');
-    require('classes/Model.php');
+    require_once('classes/Messages.php');
+    require_once('classes/Bootstrap.php');
+    require_once('classes/Controller.php');
+    require_once('classes/Model.php');
 
     require('controllers/home.php');
-    require('controllers/shares.php');
     require('controllers/users.php');
     require('controllers/borrow.php');
-
+    require('controllers/myLibrary.php');
 
     require('models/home.php');
-    require('models/share.php');
     require('models/user.php');
     require('models/borrow.php');
+    require('models/myLibrary.php');
 
 
 

@@ -22,12 +22,12 @@
                     $rol = 'admin';
                 }
 
-                // Separación del nombre y del apellido (StringTokenizer)
+                // Split of name and surname (Like a stringTokenizer)
                 $completeName = explode(' ', $post['completeName']);
                 $name = $completeName[0];
                 $surname = $completeName[1];
 
-                // Separación de los campos adress, city y province (StringTokenizer)
+                // Split of adress, city y province (Like a stringTokenizer)
                 $completeAddress = explode(',', $post['completeAddress']);
                 $address = $completeAddress[0];
                 $city = $completeAddress[1];
@@ -97,7 +97,8 @@
                 $this->update($id);
             }
 
-            $this->query("SELECT * FROM user JOIN book on user.id = book.id_user WHERE user.id = $id ORDER BY book.create_time DESC");
+            //$this->query("SELECT * FROM user JOIN book on user.id = book.id_user WHERE user.id = $id ORDER BY book.create_time DESC LIMIT 4");
+            $this->query("SELECT * FROM user ");
             return $this->single();
         }
 
@@ -114,18 +115,23 @@
 
                 $password = md5($post['password']);
 
-                // Separación del nombre y del apellido (StringTokenizer)
+                // Split of name and surname (Like a stringTokenizer)
                 $completeName = explode(' ', $post['completeName']);
                 $name = $completeName[0];
                 $surname = $completeName[1];
 
-                // Separación de los campos adress, city y province (StringTokenizer)
+                // Split of adress, city y province (Like a stringTokenizer)
                 $completeAddress = explode(',', $post['completeAddress']);
                 $address = $completeAddress[0];
                 $city = $completeAddress[1];
                 $province = $completeAddress[2];
 
-                // Tratamiento de la imagen
+                /* Tratamiento de la imagen
+                    Fuente: https://es.stackoverflow.com/questions/512919/como-remplazar-una-imagen-al-actualizar-un-registro-con-php
+                    Segunda fuente: https://es.stackoverflow.com/questions/478716/como-borrar-imagen-de-servidor-php
+                    :)
+                */
+
                 if (isset($_FILES['image'])){
                     $newImage = $_FILES['image']['name']; // Get the name of the image
                     $oldImage = $_SESSION['user_data']['image']; // Get the old profile photo
@@ -138,7 +144,7 @@
                     if (array($imageExtension, $validExtensions)){ // If the imageExtension is in the array of valid extensions
                         $uploadDir = 'assets/userImages/'; // The directory where the img are
                         $uploadPath = $uploadDir . $newImage; // Path where the img will be saved
-                        move_uploaded_file($imageTmp, $uploadPath); // Move the img to the path i want
+                        move_uploaded_file($imageTmp, $uploadPath); // Move the img to the path I want
 
                         if (is_writable($oldImage)){
                             unlink($oldImage);
@@ -184,7 +190,8 @@
 
         public function getLastBooks($id = null)
         {
-            $this->query("SELECT * FROM book WHERE ID = $id ORDER BY create_time DESC");
+
+            $this->query("SELECT * FROM book WHERE id_user = $id ORDER BY create_time DESC LIMIT 4");
             $rows = $this->resultSet();
             return ($rows);
         }

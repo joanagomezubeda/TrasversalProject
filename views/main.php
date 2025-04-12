@@ -21,7 +21,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <img src="<?php echo ROOT_PATH; ?>assets/images/icon.png" alt="" class="image-width img-fluid ms-3 navbar-icon">
+            <img src="<?php echo ROOT_PATH; ?>assets/images/icon.png" alt="Icon of BookLends" class="image-width img-fluid ms-3 navbar-icon">
             <a class="navbar-brand fw-bold ms-2 fs-3" href="<?php echo ROOT_PATH; ?>">BookLends</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -38,7 +38,7 @@
                                 <a href="<?php echo ROOT_URL;?>borrow/index" class="nav-link">Borrow</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">My Library</a>
+                                <a href="<?php echo ROOT_URL;?>myLibrary/index" class="nav-link">My Library</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">Community</a>
@@ -98,7 +98,7 @@
                         <li><a href="<?php echo ROOT_URL;?>borrow" class="ms-2 fw-semibold"><i class="bi bi-search-heart-fill fs-5 me-2"></i>Borrow</a></li>
                     </div>
                     <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'myLibrary') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
-                        <li><a href="#" class="ms-2 fw-semibold"><i class="bi bi-suit-heart-fill fs-5 me-2"></i>My library</a></li>
+                        <li><a href="<?php echo ROOT_URL;?>myLibrary" class="ms-2 fw-semibold"><i class="bi bi-suit-heart-fill fs-5 me-2"></i>My library</a></li>
                     </div>
                     <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'community') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
                         <li><a href="#" class="ms-2 fw-semibold"><i class="bi bi-chat-square-heart-fill fs-5 me-2"></i>Community</a></li>
@@ -140,7 +140,7 @@
 
 <main>
     <div class="container body-animation">
-        <div class="row d-flex justify-content-center mt-5">
+        <div class="row d-flex justify-content-center mt-4">
             <div class="row ">
                 <?php require ($view); ?>
             </div>

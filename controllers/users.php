@@ -23,9 +23,15 @@
         }
 
         protected function profile(){
+            if(!isset($_SESSION['is_logged_in'])){
+                header('Location: '.ROOT_URL);
+            }
+
             $id = $this->request['id'];
             $viewmodel = new UserModel();
-            $this->returnView($viewmodel->profile($id), true);
+            $lastBooks = $viewmodel->getLastBooks($id);
+            $userData = $viewmodel->profile($id);
+            $this->ReturnView(['userData' => $userData, 'lastBooks' => $lastBooks], true);
         }
 
         protected function update()
@@ -37,7 +43,6 @@
             $id = $this->request['id'];
             $this->returnView($viewmodel->update($id), true);
         }
-
 
     }
 ?>
