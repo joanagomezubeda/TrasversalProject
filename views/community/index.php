@@ -1,6 +1,7 @@
 <?php if (isset($_SESSION['is_logged_in'])):?>
     <div class="bg-color p-3 shadow rounded-3">
-        <form action="<?php $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
+        <form action="<?php  $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
+            <?php Messages::display(); ?>
             <div class="d-flex">
                 <img src="<?php echo $_SESSION['user_data']['image']?>" alt="User profile of <?php echo $_SESSION['user_data']['name']?>" class="rounded-circle icon-image">
                 <textarea name="description" id="description" cols="10" rows="2" class="form-control bg-transparent align-content-center " placeholder="What are you reading?..."></textarea>
@@ -12,7 +13,6 @@
                 </div>
                 <button class="btn btn-primary-color px-5" type="submit" name="submit">Post</button>
             </div>
-            <?php var_dump($_POST)?>
         </form>
     </div>
 <?php endif; ?>

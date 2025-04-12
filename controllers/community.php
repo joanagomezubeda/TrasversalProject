@@ -9,11 +9,15 @@
 
         protected function add()
         {
-            if(!isset($_SESSION['is_logged_in'])){
-                header('Location: '.ROOT_URL);
-            }
             $viewmodel = new CommunityModel();
             $this->returnView($viewmodel->add(), true);
+        }
+
+        protected function show()
+        {
+            $id = $this->request['id'];
+            $viewmodel = new CommunityModel();
+            $this->returnView($viewmodel->show($id), true);
         }
     }
 ?>

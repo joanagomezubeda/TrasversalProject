@@ -11,6 +11,12 @@
             return($rows);
         }
 
+        public function show($id)
+        {
+            $this->query("SELECT * FROM publication WHERE id = $id");
+            return $this->single();
+        }
+
         public function add()
         {
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING );
@@ -51,21 +57,22 @@
                 try {
                     $userId = $_SESSION['user_data']['id'];
                     // Insert into MySQL
-                    $this->query("INSERT INTO publication(description, image,id_user) VALUES(:description,:image, :id_user)");
+                    $this->query("INSERT INTO publication(description, publication_image,id_user) VALUES(:description,:publication_image, :id_user)");
                     $this->bind(':description', $post['description']);
-                    $this->bind(':image', $imageToSave);
+                    $this->bind(':publication_image', $imageToSave);
                     $this->bind(':id_user', $userId);
                     $this->execute();
 
-                    header('Location:'.ROOT_URL.'myLibrary');
+                    //header('Location:'.ROOT_URL.'myLibrary');
                 } catch (\Exception $e){
                     Messages::setMessage($e->getMessage(), 'error');
                 }
-
+            /*
                 if ($this->lastInsertId()){
                     // Redirect
                     header('Location:'.ROOT_URL.'community');
                 }
+            */
             }
             return;
         }
