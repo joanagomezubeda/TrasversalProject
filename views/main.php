@@ -35,16 +35,16 @@
                                 <a href="<?php echo ROOT_URL;?>" class="nav-link">Explore</a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?php echo ROOT_URL;?>borrow/index" class="nav-link">Borrow</a>
+                                <a href="<?php echo ROOT_URL;?>borrow" class="nav-link">Borrow</a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?php echo ROOT_URL;?>myLibrary/index" class="nav-link">My Library</a>
+                                <a href="<?php echo ROOT_URL;?>myLibrary" class="nav-link">My Library</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Community</a>
+                                <a href="<?php echo ROOT_URL;?>community" class="nav-link">Community</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">My Profile</a>
+                                <a href="<?php echo ROOT_URL?>users/profile/<?php echo $_SESSION['user_data']['id'];?>" class="nav-link">My Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="<?php echo ROOT_PATH;?>users/logout">Logout</a>
@@ -103,7 +103,7 @@
                     </div>
                     <?php endif?>
                     <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'Community') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
-                        <li><a href="#" class="ms-2 fw-semibold"><i class="bi bi-chat-square-heart-fill fs-5 me-2"></i>Community</a></li>
+                        <li><a href="<?php echo ROOT_URL;?>community" class="ms-2 fw-semibold"><i class="bi bi-chat-square-heart-fill fs-5 me-2"></i>Community</a></li>
                     </div>
 
                 </ul>

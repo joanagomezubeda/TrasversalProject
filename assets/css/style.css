@@ -172,9 +172,22 @@ ul img{
     height: 10rem !important;
 }
 
+.icon-image{
+    width: 3rem !important;
+    height: 3rem !important;
+}
 .div-details{
     width: 35% !important;
     height: 21rem;
+}
+
+.img-comments{
+    width: 100% !important;
+    height: 10rem !important;
+}
+
+.input-type-file{
+    display: none !important;
 }
 
 @media (max-width: 768px){

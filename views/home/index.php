@@ -61,8 +61,8 @@
             <?php foreach ($viewmodel as $item): ?>
                 <div class="col-12 col-md-6 col-lg-3 mb-4 ">
                     <a href="<?php echo ROOT_PATH?>borrow/show/<?php echo $item['ID']?>">
-                        <img src="<?php echo ROOT_URL.'assets/'.$item['image']; ?>"
-                             alt=""
+                        <img src="<?php echo ROOT_URL.$item['image']; ?>"
+                             alt="<?php echo ROOT_URL.$item['title']; ?>"
                              class="w-100 object-fit-cover rounded-3 static-height">
                     </a>
                 </div>
