@@ -88,19 +88,21 @@
 
             <nav class="userNav">
                 <!--    Var to get in what view. With that var we put some div classes to look pretty -->
-                <?php $viewName = strtolower(get_class($this)); ?>
+                <?php $viewName = get_class($this); ?>
 
                 <ul class="list-unstyled">
-                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'home') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'Home') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
                         <li><a href="<?php echo ROOT_URL;?>" class="ms-2 fw-semibold"><i class="bi bi-bookmark-heart-fill fs-5 me-2"></i>Explore</a></li>
                     </div>
-                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'borrow') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'Borrow') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
                         <li><a href="<?php echo ROOT_URL;?>borrow" class="ms-2 fw-semibold"><i class="bi bi-search-heart-fill fs-5 me-2"></i>Borrow</a></li>
                     </div>
-                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'myLibrary') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                    <?php if(isset($_SESSION['is_logged_in'])): ?>
+                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'MyLibrary') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
                         <li><a href="<?php echo ROOT_URL;?>myLibrary" class="ms-2 fw-semibold"><i class="bi bi-suit-heart-fill fs-5 me-2"></i>My library</a></li>
                     </div>
-                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'community') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                    <?php endif?>
+                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'Community') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
                         <li><a href="#" class="ms-2 fw-semibold"><i class="bi bi-chat-square-heart-fill fs-5 me-2"></i>Community</a></li>
                     </div>
 

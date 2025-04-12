@@ -97,7 +97,6 @@
                 $this->update($id);
             }
 
-            //$this->query("SELECT * FROM user JOIN book on user.id = book.id_user WHERE user.id = $id ORDER BY book.create_time DESC LIMIT 4");
             $this->query("SELECT * FROM user ");
             return $this->single();
         }
@@ -179,12 +178,6 @@
                 } catch (\Exception $e){
                     Messages::setMessage($e->getMessage(), 'error');
                 }
-            } else{
-                //print_r($id);
-                $this->query("SELECT * FROM shares where id=$id");
-                $row = $this->single();
-                return $row;
-
             }
         }
 
