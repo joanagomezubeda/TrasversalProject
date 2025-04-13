@@ -10,9 +10,14 @@
                 <h3 class="mt-3"><?php echo $item['title'];?></h3>
                 <h6><?php echo $item['author'];?></h6>
                 <p>Genre: <?php echo $item['genre']?></p>
-                <div class="d-flex justify-content-center gap-4 flex-sm-row flex-column">
-                    <a class="btn btn-primary-color shadow w-50 w-sm-100" href="<?php echo ROOT_PATH; ?>myLibrary/edit/<?php echo $item['ID']?>">Edit</a>
-                    <button class="btn btn-primary-outline shadow w-50 w-sm-100" data-bs-toggle="modal" data-bs-target="#modalToDelete-<?php echo $item['ID']?>">Delete</button>
+                <a class="btn btn-primary-color shadow w-100" href="<?php echo ROOT_PATH; ?>borrow/show/<?php echo $item['ID']?>">Show</a>
+                <div class="d-flex justify-content-center gap-4 flex-sm-row flex-column mt-3">
+                    <?php if ($item['isBorrowed']):?>
+                        <a class="btn btn-primary-outline shadow w-100" href="<?php echo ROOT_PATH; ?>borrow/unborrow/<?php echo $item['ID']?>">Unborrow</a>
+                    <?php else:?>
+                        <a class="btn btn-secondary-outline shadow w-50 w-sm-100" href="<?php echo ROOT_PATH; ?>myLibrary/edit/<?php echo $item['ID']?>">Edit</a>
+                        <button class="btn btn-primary-outline shadow w-50 w-sm-100" data-bs-toggle="modal" data-bs-target="#modalToDelete-<?php echo $item['ID']?>">Delete</button>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

@@ -2,11 +2,21 @@
 
     class MyLibraryModel extends Model {
 
-        public function index($id)
+        public function index($userId)
         {
-            $this->query("SELECT * FROM book WHERE id_user = $id");
-            $rows = $this->resultSet();
-            return($rows);
+            $this->query("
+                SELECT book.*, 
+                       CASE 
+                           WHEN lend.borrow_user_id = $userId THEN 1 
+                           ELSE 0 
+                       END AS isBorrowed
+                FROM book 
+                LEFT JOIN lend ON book.ID = lend.book_id AND lend.borrow_user_id = $userId
+                WHERE book.id_user = $userId OR lend.borrow_user_id = $userId
+                GROUP BY book.ID
+            ");
+
+            return $this->resultSet();
         }
 
         public function edit($id = null)
@@ -65,11 +75,12 @@
                 }
 
                 try {
+                    // Var from de select of the form
                     $lendTheBook = $post['lendTheBook'];
                     $userId = $_SESSION['user_data']['id'];
                     // Insert into MySQL
-                    $this->query("INSERT INTO book(title, description, author, editorial, genre, image,id_user) VALUES(:title, :description, 
-                     :author, :editorial, :genre ,:image, :id_user)");
+                    $this->query("INSERT INTO book(title, description, author, editorial, genre, image,toLend,id_user) VALUES(:title, :description, 
+                     :author, :editorial, :genre ,:image,:toLend, :id_user)");
                     $this->bind(':title', $post['title']);
                     $this->bind(':description', $post['description']);
                     $this->bind(':author', $post['author']);
@@ -77,15 +88,24 @@
                     $this->bind(':genre', $post['genre']);
                     $this->bind(':image', $imageToSave);
                     $this->bind(':id_user', $userId);
-                    $this->execute();
-                    $bookId = $this->lastInsertId();
+
+
+                    // If the user said "yes"
                     if ($lendTheBook === 'yes'){
+                        /*
                         $this->query('INSERT INTO lend(user_id, book_id, lend_date) VALUES(:user_id, :book_id, :lend_date)');
                         $this->bind(':user_id', $userId);
                         $this->bind(':book_id', $bookId );
                         $this->bind(':lend_date', date("Y-m-d"));
                         $this->execute();
+                        */
+                        $this->bind(':toLend', 1);
+                        $this->execute();
+                    } else {
+                        $this->bind(':toLend', 0);
+                        $this->execute();
                     }
+
                     header('Location:'.ROOT_URL.'myLibrary');
                 } catch (\Exception $e){
                     Messages::setMessage($e->getMessage(), 'error');
@@ -131,7 +151,7 @@
                         $uploadDir = 'assets/bookImages/'; // The directory where the img are
                         $uploadPath = $uploadDir . $newImage; // Path where the img will be saved
                         if (move_uploaded_file($imageTmp, $uploadPath)) {
-                            if (is_writable($oldPhoto)){
+                            if (is_writable($oldPhoto)){ // To remove the img of the folder
                                 unlink($oldPhoto);
                             }
                             $imageToSave = $uploadPath;
@@ -148,9 +168,10 @@
 
                 // Insert into MySQL
                 try {
+                    // Variable of the select of the form in HTML
                     $lendTheBook = $post['lendTheBook'];
                     $this->query("UPDATE book SET title = :title, description = :description, author = :author, 
-                editorial = :editorial, genre = :genre, image = :image WHERE id = :id");
+                    editorial = :editorial, genre = :genre, image = :image, toLend = :toLend WHERE id = :id");
                     $this->bind(':title', $post['title']);
                     $this->bind(':description', $post['description']);
                     $this->bind(':image', $imageToSave);
@@ -158,21 +179,16 @@
                     $this->bind(':editorial',$post['editorial']);
                     $this->bind(':genre', $post['genre']);
                     $this->bind(':id', $id);
-                    $this->execute();
-                    $bookId = $id;
-                    $userId = $_SESSION['user_data']['id'];
+
+                    // If the user said yes it will update the table
                     if ($lendTheBook === 'yes'){
-                        $this->query('UPDATE lend SET user_id = :user_id, book_id = :book_id, lend_date = :lend_date');
-                        $this->bind(':user_id', $userId);
-                        $this->bind(':book_id', $bookId );
-                        $this->bind(':lend_date', date("Y-m-d"));
+                        $this->bind(':toLend', 1);
                         $this->execute();
-                    } elseif ($lendTheBook === 'no'){
-                        $this->query('DELETE FROM lend WHERE book_id = :book_id AND user_id = :user_id');
-                        $this->bind(':user_id', $userId);
-                        $this->bind(':book_id', $bookId );
+                    } else {
+                        $this->bind(':toLend', 0);
                         $this->execute();
                     }
+
                     header('Location: ' . ROOT_URL.'myLibrary');
                 } catch (\Exception $e){
                     Messages::setMessage($e->getMessage(), 'error');

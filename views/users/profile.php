@@ -2,8 +2,11 @@
 
     <!-- Image of the user with input to change it-->
     <div class="bg-color rounded-2 div-details p-1 shadow">
-        <img src="<?php echo ROOT_URL.$_SESSION['user_data']['image']; ?>" alt="" class="img-fluid img-details p-2 rounded-2 object-fit-cover ">
-
+        <?php if (isset($_SESSION['user_data']['image'])): ?>
+            <img src="<?php echo ROOT_URL.$_SESSION['user_data']['image']; ?>" alt="" class="img-fluid img-details p-2 rounded-2 object-fit-cover ">
+        <?php else: ?>
+            <img src="<?php echo ROOT_URL;?>assets/images/defaultProfile.jpg" alt="Default profile icon" class="img-fluid img-details p-2 rounded-2 object-fit-cover">
+        <?php endif ?>
     </div>
 
     <!-- Form to update the data of the user -->
@@ -14,26 +17,26 @@
             <div class="form-group mt-3 d-flex flex-column flex-xl-row">
                 <!-- Name -->
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                    <label for="completeName">Complete Name</label>
-                    <input type="text" value="<?php echo $viewmodel['userData']['name'].' '.$viewmodel['userData']['surname']?>" name="completeName" class="form-control form-border" id="completeName" required>
+                    <label for="completeName">Complete Name *</label>
+                    <input type="text" value="<?php echo $viewmodel['userData']['name'].' '.$viewmodel['userData']['surname']?>" name="completeName" class="form-control form-border" id="completeName">
                 </div>
                 <!-- Address -->
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 mt-3 mt-xl-0">
                     <label for="completeAddress">Complete address</label>
-                    <input type="text" value="<?php echo $viewmodel['userData']['address'].', '.$viewmodel['userData']['city'].', '.$viewmodel['userData']['province']?>" name="completeAddress" class="form-control form-border" id="completeAddress" required>
+                    <input type="text" value="<?php echo $viewmodel['userData']['address'].', '.$viewmodel['userData']['city'].', '.$viewmodel['userData']['province']?>" name="completeAddress" class="form-control form-border" id="completeAddress" >
                 </div>
             </div>
             <!-- Email and Password -->
             <div class="form-group mt-3 d-flex flex-column   flex-xl-row">
                 <!-- Email -->
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 mt-3 mt-xl-0">
-                    <label for="email">Email</label>
-                    <input type="email" value="<?php echo $viewmodel['userData']['email']?>" name="email" class="form-control form-border" id="email" required>
+                    <label for="email">Email *</label>
+                    <input type="email" value="<?php echo $viewmodel['userData']['email']?>" name="email" class="form-control form-border" id="email" >
                 </div>
                 <!-- Pàssword -->
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 mt-3 mt-lg-0">
-                    <label for="password">Password</label>
-                    <input type="password" placeholder="************" name="password" class="form-control form-border" id="password" required>
+                    <label for="password">Password *</label>
+                    <input type="password" value="************" name="password" class="form-control form-border" id="password" >
                 </div>
             </div>
 

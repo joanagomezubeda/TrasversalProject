@@ -2,7 +2,8 @@
    class BorrowModel extends model{
        public function index()
        {
-           $this->query('SELECT * FROM book WHERE ID not in (SELECT book_id FROM lend) OR ID NOT IN (SELECT lend.BOOK_ID from lend where return_date > current_date())');
+           $userId = $_SESSION['user_data']['id'];
+           $this->query("SELECT * FROM book WHERE id_user != $userId AND ( ID not in (SELECT book_id FROM lend) OR ID NOT IN (SELECT lend.BOOK_ID from lend where return_date > current_date()))");
            $rows = $this->resultSet();
            return($rows);
 
@@ -21,12 +22,103 @@
            return;
        }
 
-       public function getRelatedBooksByGender($gender, $id)
+       public function getRelatedBooksByGenre($genre, $id)
        {
-           $this->query("SELECT * FROM book WHERE gender = '$gender' AND ID not in (SELECT ID FROM book WHERE ID = $id)");
-           $rows = $this->resultSet();
-           return ($rows);
+           $this->query("SELECT * FROM book WHERE ID = $id");
+           $this->execute();
+           $result = $this->single();
 
+           if ($result> 0){
+               $this->query("SELECT * FROM book WHERE genre = '$genre' AND ID not in (SELECT ID FROM book WHERE ID = $id OR title = :title AND author = :author)");
+               $this->bind(':title', $result['title']);
+               $this->bind(':author', $result['author']);
+               $rows = $this->resultSet();
+               return ($rows);
+           }
+
+       }
+
+       public function unborrow($id)
+       {
+           $this->query("DELETE FROM lend WHERE book_id = $id");
+           $this->execute();
+           header('Location: ' . ROOT_URL);
+       }
+
+       public function borrowBook($id, $userId)
+       {
+           try {
+               $this->query("SELECT id_user FROM book WHERE id = $id");
+               $result = $this->single();
+
+               if ($result > 0) {
+                   $this->query('INSERT INTO lend(user_id, book_id, lend_date,borrow_user_id) VALUES(:user_id, :book_id, :lend_date, :borrow_user_id)');
+                   $this->bind(':borrow_user_id', $userId);
+                   $this->bind(':user_id', $result['id_user']);
+                   $this->bind(':book_id', $id );
+                   $this->bind(':lend_date', date("Y-m-d"));
+                   $this->execute();
+                   Messages::setMessage('You had borrow the book!', 'success');
+                   header('Location: ' . ROOT_URL . 'borrow');
+               }
+
+
+
+           } catch (\Exception $e){
+               Messages::setMessage('There was a trouble borrowing the book! <i class=" ms-1 bi bi-emoji-frown"></i>', 'error');
+               header('Location: ' . ROOT_URL . 'borrow/show/' . $id);
+           }
+
+       }
+
+       public function isBorrowed($id, $userId)
+       {
+           $this->query("SELECT * FROM lend WHERE book_id = $id AND borrow_user_id = $userId");
+           $result = $this->single();
+
+           if ($result){
+               return true;
+           } else {
+               return false;
+           }
+       }
+
+
+       public function saveBook($id, $userId)
+       {
+           $this->query("SELECT * FROM book WHERE ID = $id");
+           $result = $this->single();
+
+           if ($result > 0){
+               $this->query("INSERT INTO book(title, description, author, editorial, genre, image, id_user) VALUES (:title, :description, :author, :editorial, :genre, :image, :id_user)");
+               $this->bind(':title', $result['title']);
+               $this->bind(':description', $result['description']);
+               $this->bind(':author', $result['author']);
+               $this->bind(':editorial', $result['editorial']);
+               $this->bind(':genre', $result['genre']);
+               $this->bind(':image', $result['image']);
+               $this->bind(':id_user', $userId);
+               $this->execute();
+           }
+
+       }
+
+       public function isSaved($id, $userId)
+       {
+           $this->query("SELECT * FROM book WHERE ID = $id AND id_user = $userId");
+           $result = $this->single();
+
+           if ($result){
+               return true;
+           } else {
+               return false;
+           }
+       }
+
+       public function unsaveBook($id, $userId)
+       {
+           $this->query("DELETE FROM book WHERE ID = $id AND id_user = $userId");
+           $this->execute();
        }
    }
 ?>

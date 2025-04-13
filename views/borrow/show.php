@@ -1,18 +1,29 @@
 
 <!-- Book details. If you are not logged in you could not save the book or borrow it -->
-
+<?php Messages::display();?>
 <div class="d-flex flex-column flex-lg-row text-justify">
     <div class="bg-color rounded-2 div-details p-1 ">
-        <img src="<?php echo ROOT_PATH.'assets/'.$viewmodel['book']['image'];?>" alt="" class="img-fluid img-details p-2 rounded-2 object-fit-cover">
+        <img src="<?php echo ROOT_PATH.$viewmodel['book']['image'];?>" alt="" class="img-fluid img-details p-2 rounded-2 object-fit-cover">
     </div>
+
     <div class=" col-sm-12 col-md-12 col-lg-6 col-xl-6 mt-sm-3 ms-lg-5 margin-xsm">
+
         <h1><?php echo $viewmodel['book']['title']?></h1>
         <h6>by <?php echo $viewmodel['book']['author']?></h6>
         <p><?php echo $viewmodel['book']['description']?></p>
         <?php if (isset($_SESSION['is_logged_in'])): ?>
             <div class="d-flex flex-column flex-md-row gap-4">
-                <button class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-6 col-12 ">Borrow</button>
-                <button class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-5 col-12" >Save</button>
+                <?php if ($viewmodel['isSaved']): ?>
+                    <!-- Once you save it, its like a copy in your library so you can't borrow it because its yours :) -->
+                    <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-5 col-12" href="<?php echo ROOT_URL?>borrow/unsave/<?php echo $viewmodel['book']['ID'] ?>">Unsave</a>
+                <?php else: ?>
+                    <?php if($viewmodel['isBorrowed']): ?>
+                        <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-6 col-12 " href="<?php echo ROOT_URL?>borrow/unborrow/<?php echo $viewmodel['book']['ID'] ?>">Unborrow</a>
+                    <?php else: ?>
+                        <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-6 col-12 " href="<?php echo ROOT_URL?>borrow/borrowBook/<?php echo $viewmodel['book']['ID'] ?>">Borrow</a>
+                    <?php endif; ?>
+                    <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-5 col-12" href="<?php echo ROOT_URL?>borrow/saveBook/<?php echo $viewmodel['book']['ID'] ?>">Save</a>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
     </div>
@@ -49,7 +60,7 @@
                         <div class="bg-color text-clamp shadow text-align-justify px-3 pb-2 rounded">
                             <a href="<?php echo ROOT_PATH; ?>borrow/show/<?=$item['ID']?>" class="text-decoration-none text-black d-block" target="_self">
                                 <div class="mt-4">
-                                    <img src="<?php echo ROOT_PATH.'assets/'.$item['image'];?>" alt="" class="img-fluid img-details p-2 rounded-2 object-fit-cover">
+                                    <img src="<?php echo ROOT_PATH.$item['image'];?>" alt="" class="img-fluid img-details p-2 rounded-2 object-fit-cover">
                                     <h6 class="text-center"><?php echo $item['title']?></h6>
                                 </div>
                             </a>

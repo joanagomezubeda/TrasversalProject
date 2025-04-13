@@ -50,6 +50,21 @@ body{
     text-decoration: none;
 }
 
+.btn-secondary-outline{
+    background-color: transparent;
+    border: 2px solid var(--geometric-color);
+    color: black;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-secondary-outline:hover{
+    background-color: transparent;
+    border: 2px solid var(--geometric-color);
+    color: black;
+    border-radius: 5px;
+    text-decoration: none;
+}
 
 .asideLeft, .asideRight {
     height: 100vh;

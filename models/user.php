@@ -97,12 +97,15 @@
                 $this->update($id);
             }
 
-            $this->query("SELECT * FROM user ");
+            $this->query("SELECT * FROM user WHERE id = $id ");
             return $this->single();
         }
 
         public function update($id = null)
         {
+            $this->query("SELECT image FROM user WHERE id = $id");
+            $response = $this->single();
+            $oldPhoto = $response['image'];
             // Sanitize POST
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -133,7 +136,7 @@
 
                 if (isset($_FILES['image'])){
                     $newImage = $_FILES['image']['name']; // Get the name of the image
-                    $oldImage = $_SESSION['user_data']['image']; // Get the old profile photo
+
                     $imageTmp = $_FILES['image']['tmp_name']; // Get the temporal path where the img is
 
                     $imageExtension = strtolower(pathinfo($newImage, PATHINFO_EXTENSION)); // Get the extension of the img
@@ -143,19 +146,22 @@
                     if (array($imageExtension, $validExtensions)){ // If the imageExtension is in the array of valid extensions
                         $uploadDir = 'assets/userImages/'; // The directory where the img are
                         $uploadPath = $uploadDir . $newImage; // Path where the img will be saved
-                        move_uploaded_file($imageTmp, $uploadPath); // Move the img to the path I want
 
-                        if (is_writable($oldImage)){
-                            unlink($oldImage);
+                        if (move_uploaded_file($imageTmp, $uploadPath)) { // To store the img in the folder
+                            $imageToSave = $uploadPath;
+                            $_SESSION['user_data']['image'] = 'assets/userImages/' . $newImage;
+                            if (is_writable($oldPhoto)){
+                                unlink($oldPhoto);
+                            }
+                        } else {
+                            $imageToSave = $oldPhoto;
                         }
-
-                        $imageToSave = $uploadPath;
-                        $_SESSION['user_data']['image'] = 'assets/userImages/' . $newImage;
                     } else {
+                        $imageToSave =$oldPhoto;
                         Messages::setMessage('The extension is not valid', 'error');
                     }
                 } else {
-                    $imageToSave = $_SESSION['user_data']['image'];
+                    $imageToSave =$oldPhoto;
                 }
 
 

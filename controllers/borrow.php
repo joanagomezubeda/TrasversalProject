@@ -4,21 +4,22 @@
         protected function index()
         {
             $viewmodel = new BorrowModel();
-            $this->ReturnView($viewmodel->index(), true);
+            $this->returnView($viewmodel->index(), true);
         }
 
         protected function show()
         {
             $id = $this->request['id'];
-
+            $userId = $_SESSION['user_data']['id'];
             $viewmodel = new BorrowModel();
             $book = $viewmodel->show($id);
             if (isset($book)){
-                $gender = $book['gender'];
-                $relatedBooks = $viewmodel->getRelatedBooksByGender($gender, $id);
+                $genre = $book['genre'];
+                $relatedBooks = $viewmodel->getRelatedBooksByGenre($genre, $id);
             }
-
-            $this->ReturnView(['book'=>$book, 'relatedBooks' => $relatedBooks], true);
+            $isSavedBook = $viewmodel->isSaved($id, $userId);
+            $isBorrowed = $viewmodel->isBorrowed($id, $userId);
+            $this->returnView(['book'=>$book, 'relatedBooks' => $relatedBooks, 'isSaved' => $isSavedBook, 'isBorrowed' => $isBorrowed], true);
         }
 
         protected function delete()
@@ -29,6 +30,40 @@
             header('Location:'. ROOT_URL.'borrow');
         }
 
+
+        protected function unborrow()
+        {
+            $id = $this->request['id'];
+            $viewmodel = new BorrowModel();
+            $viewmodel->unborrowBook($id);
+        }
+
+        protected function borrowBook()
+        {
+            $userId = $_SESSION['user_data']['id'];
+            $id = $this->request['id'];
+            $viewmodel = new BorrowModel();
+            $viewmodel->borrowBook($id, $userId);
+
+        }
+
+        protected function saveBook()
+        {
+            $userId = $_SESSION['user_data']['id'];
+            $id = $this->request['id'];
+            $viewmodel = new BorrowModel();
+            $viewmodel->saveBook($id, $userId);
+            header('Location: ' . ROOT_URL . 'myLibrary');
+        }
+
+        protected function unsaveBook()
+        {
+            $userId = $_SESSION['user_data']['id'];
+            $id = $this->request['id'];
+            $viewmodel = new BorrowModel();
+            $viewmodel->unsaveBook($id, $userId);
+            header('Location: ' . ROOT_URL . 'myLibrary');
+        }
 
 
     }

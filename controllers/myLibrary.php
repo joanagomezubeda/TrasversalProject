@@ -7,9 +7,9 @@
                 header('Location: '.ROOT_URL);
             }
 
-            $id = $_SESSION['user_data']['id'];
+            $userId = $_SESSION['user_data']['id'];
             $viewmodel = new MyLibraryModel();
-            $this->returnView($viewmodel->index($id), true);
+            $this->returnView($viewmodel->index($userId), true);
         }
 
 
