@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between ">
-    <button class="btn btn-primary-color shadow ">Filter</button>
+    <button class="btn btn-primary-color shadow "><i class="bi bi-funnel-fill"></i></button>
     <a class="btn btn-primary-color shadow me-4 " href="<?php echo ROOT_PATH; ?>myLibrary/add">Add a new book</a>
 </div>
 <div class="row d-flex justify-content-sm-center justify-content-lg-start mt-4">

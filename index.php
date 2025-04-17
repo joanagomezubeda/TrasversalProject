@@ -15,12 +15,14 @@
     require('controllers/borrow.php');
     require('controllers/myLibrary.php');
     require('controllers/community.php');
+    require('controllers/lendZone.php');
 
     require('models/home.php');
     require('models/user.php');
     require('models/borrow.php');
     require('models/myLibrary.php');
     require('models/community.php');
+    require('models/lendZone.php');
 
 
 

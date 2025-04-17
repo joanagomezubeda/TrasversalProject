@@ -21,8 +21,8 @@
                         <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-6 col-12 " href="<?php echo ROOT_URL?>borrow/unborrow/<?php echo $viewmodel['book']['ID'] ?>">Unborrow</a>
                     <?php else: ?>
                         <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-6 col-12 " href="<?php echo ROOT_URL?>borrow/borrowBook/<?php echo $viewmodel['book']['ID'] ?>">Borrow</a>
+                        <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-5 col-12" href="<?php echo ROOT_URL?>borrow/saveBook/<?php echo $viewmodel['book']['ID'] ?>">Save</a>
                     <?php endif; ?>
-                    <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-5 col-12" href="<?php echo ROOT_URL?>borrow/saveBook/<?php echo $viewmodel['book']['ID'] ?>">Save</a>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
