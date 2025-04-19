@@ -14,7 +14,7 @@
         <form action="<?php $_SERVER['PHP_SELF']?>" method="post" class="bg-color rounded-4 p-3 shadow" enctype="multipart/form-data">
             <?php Messages::display(); ?>
             <!-- Name and Address -->
-            <div class="form-group mt-3 d-flex flex-column flex-xl-row">
+            <div class="form-group mt-3 d-flex flex-column flex-xl-row ">
                 <!-- Name -->
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
                     <label for="completeName">Complete Name *</label>

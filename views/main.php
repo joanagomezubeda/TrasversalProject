@@ -91,15 +91,16 @@
                 <?php $viewName = get_class($this); ?>
 
                 <ul class="list-unstyled ">
-                    <?php if ($_SESSION['user_data']['rol'] === 'admin'):?>
-                        <div class="d-flex mx-5 mt-4 justify-content-md-center justify-content-xl-start <?php echo ($viewName == 'Dashboard') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
-                            <li><a href="<?php echo ROOT_URL;?>dashboard" class="ms-2 fw-semibold"><i class="bi bi-person-heart fs-5 me-2"></i><span class="d-lg-none d-xl-inline">Dashboard</span></a></li>
-                        </div>
-                    <?php endif;?>
+
                     <div class="d-flex mx-5 mt-4 justify-content-md-center justify-content-xl-start <?php echo ($viewName == 'Home') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
                         <li><a href="<?php echo ROOT_URL;?>" class="ms-2 fw-semibold"><i class="bi bi-bookmark-heart-fill fs-5 me-2"></i><span class="d-lg-none d-xl-inline">Explore</span></a></li>
                     </div>
                     <?php if(isset($_SESSION['is_logged_in'])): ?>
+                        <?php if ($_SESSION['user_data']['rol'] === 'admin'):?>
+                            <div class="d-flex mx-5 mt-4 justify-content-md-center justify-content-xl-start <?php echo ($viewName == 'Dashboard') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                                <li><a href="<?php echo ROOT_URL;?>dashboard" class="ms-2 fw-semibold"><i class="bi bi-person-heart fs-5 me-2"></i><span class="d-lg-none d-xl-inline">Dashboard</span></a></li>
+                            </div>
+                        <?php endif;?>
                         <div class="d-flex mx-5 mt-4 justify-content-md-center justify-content-xl-start <?php echo ($viewName == 'Borrow') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
                             <li><a href="<?php echo ROOT_URL;?>borrow" class="ms-2 fw-semibold"><i class="bi bi-search-heart-fill fs-5 me-2"></i><span class="d-lg-none d-xl-inline">Borrow</span></a></li>
                         </div>
