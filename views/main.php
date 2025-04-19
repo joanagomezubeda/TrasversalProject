@@ -87,27 +87,31 @@
             </div>
 
             <nav class="userNav">
-                <!--    Var to get in what view. With that var we put some div classes to look pretty -->
+                <!--    Var to get in what view we are. With that var we put some div classes to look pretty -->
                 <?php $viewName = get_class($this); ?>
 
-                <ul class="list-unstyled">
-                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'Home') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
-                        <li><a href="<?php echo ROOT_URL;?>" class="ms-2 fw-semibold"><i class="bi bi-bookmark-heart-fill fs-5 me-2"></i>Explore</a></li>
+                <ul class="list-unstyled ">
+                    <?php if ($_SESSION['user_data']['rol'] === 'admin'):?>
+                        <div class="d-flex mx-5 mt-4 justify-content-md-center justify-content-xl-start <?php echo ($viewName == 'Dashboard') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                            <li><a href="<?php echo ROOT_URL;?>dashboard" class="ms-2 fw-semibold"><i class="bi bi-person-heart fs-5 me-2"></i><span class="d-lg-none d-xl-inline">Dashboard</span></a></li>
+                        </div>
+                    <?php endif;?>
+                    <div class="d-flex mx-5 mt-4 justify-content-md-center justify-content-xl-start <?php echo ($viewName == 'Home') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                        <li><a href="<?php echo ROOT_URL;?>" class="ms-2 fw-semibold"><i class="bi bi-bookmark-heart-fill fs-5 me-2"></i><span class="d-lg-none d-xl-inline">Explore</span></a></li>
                     </div>
-
                     <?php if(isset($_SESSION['is_logged_in'])): ?>
-                        <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'Borrow') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
-                            <li><a href="<?php echo ROOT_URL;?>borrow" class="ms-2 fw-semibold"><i class="bi bi-search-heart-fill fs-5 me-2"></i>Borrow</a></li>
+                        <div class="d-flex mx-5 mt-4 justify-content-md-center justify-content-xl-start <?php echo ($viewName == 'Borrow') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                            <li><a href="<?php echo ROOT_URL;?>borrow" class="ms-2 fw-semibold"><i class="bi bi-search-heart-fill fs-5 me-2"></i><span class="d-lg-none d-xl-inline">Borrow</span></a></li>
                         </div>
-                        <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'MyLibrary') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
-                            <li><a href="<?php echo ROOT_URL;?>myLibrary" class="ms-2 fw-semibold"><i class="bi bi-suit-heart-fill fs-5 me-2"></i>My library</a></li>
+                        <div class="d-flex mx-5 mt-4 justify-content-md-center justify-content-xl-start <?php echo ($viewName == 'MyLibrary') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                            <li><a href="<?php echo ROOT_URL;?>myLibrary" class="ms-2 fw-semibold"><i class="bi bi-suit-heart-fill fs-5 me-2"></i><span class="d-lg-none d-xl-inline">My Library</span></a></li>
                         </div>
-                        <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'LendZone') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
-                            <li><a href="<?php echo ROOT_URL;?>lendZone" class="ms-2 fw-semibold"><i class="bi bi-postage-heart-fill fs-5 me-2"></i>Lend Zone</a></li>
+                        <div class="d-flex mx-5 mt-4 justify-content-md-center justify-content-xl-start <?php echo ($viewName == 'LendZone') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                            <li><a href="<?php echo ROOT_URL;?>lendZone" class="ms-2 fw-semibold"><i class="bi bi-postage-heart-fill fs-5 me-2"></i><span class="d-lg-none d-xl-inline">Lend Zone</span></a></li>
                         </div>
                     <?php endif?>
-                    <div class="d-flex mx-5 mt-4 <?php echo ($viewName == 'Community') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
-                        <li><a href="<?php echo ROOT_URL;?>community" class="ms-2 fw-semibold"><i class="bi bi-chat-square-heart-fill fs-5 me-2"></i>Community</a></li>
+                    <div class="d-flex mx-5 mt-4 justify-content-md-center justify-content-xl-start <?php echo ($viewName == 'Community') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                        <li><a href="<?php echo ROOT_URL;?>community" class="ms-2 fw-semibold"><i class="bi bi-chat-square-heart-fill fs-5 me-2"></i><span class="d-lg-none d-xl-inline">Community</span></a></li>
                     </div>
 
 
@@ -133,12 +137,45 @@
         </div>
 </aside>
 
-<!-- Aside right with the last books you save on your library -->
+<!-- Aside right with the last books you saved on your library -->
+
+<?php $book = AppService::getLastBook(); ?>
 
 <aside class="asideRight">
-    <div class="d-sm-none d-lg-block">
+    <div class="d-sm-none d-lg-none d-xl-block">
         <?php if(isset($_SESSION['is_logged_in'])): ?>
-           <h1>a</h1>
+           <div class="d-flex justify-content-center mt-4">
+              <div class="w-75 justify-content-center">
+                  <h2 class="fw-bolder mt-3">Currently Reading</h2>
+                  <!-- Last book in your library -->
+                  <div class="bg-white rounded-3 shadow justify-content-center mt-4">
+                      <a href="<?php echo ROOT_PATH;?>borrow/show/<?php echo $book[0]['ID']?>" class="text-decoration-none a-color">
+                          <img src="<?php echo ROOT_URL.$book[0]['image']; ?>" alt="<?php echo $book[0]['image'];?>" class="img-fluid rounded-top-3">
+                          <div class="px-4 pt-3 pb-1">
+                              <h5 class="fw-bolder"><?php echo $book[0]['title']?></h5>
+                              <p><?php echo $book[0]['author']?></p>
+                          </div>
+                      </a>
+                  </div>
+                  <!-- Lasts books in your library -->
+                  <div>
+                      <?php for($i = 1; $i < count($book); $i++): ?>
+                          <div class="bg-white rounded-3 shadow justify-content-center mt-4">
+                              <a href="<?php echo ROOT_PATH;?>borrow/show/<?php echo $book[$i]['ID']?>" class="text-decoration-none a-color">
+                                 <div class="d-flex">
+                                     <img src="<?php echo ROOT_URL.$book[$i]['image']; ?>" alt="<?php echo $book[$i]['title']; ?>" class="img-fluid rounded-3 img-main p-3 object-fit-cover">
+                                     <div class=" pt-3 pb-1">
+                                         <h6 class="fw-bolder"><?php echo $book[$i]['title']?></h6>
+                                         <p><?php echo $book[$i]['author']?></p>
+                                     </div>
+                                 </div>
+                              </a>
+                          </div>
+                      <?php endfor;?>
+                  </div>
+
+              </div>
+           </div>
         <?php endif ?>
     </div>
 </aside>

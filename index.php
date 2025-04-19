@@ -9,6 +9,7 @@
     require_once('classes/Bootstrap.php');
     require_once('classes/Controller.php');
     require_once('classes/Model.php');
+    require_once('classes/AppService.php');
 
     require('controllers/home.php');
     require('controllers/users.php');

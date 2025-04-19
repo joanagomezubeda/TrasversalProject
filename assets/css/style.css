@@ -8,6 +8,8 @@
     --secondary-color-hover: #4f2e00;
     --button-color: #5E3700;
     --button-color-hover: #4f2e00;
+    --borrow-confirm-button: #A65E3B;
+    --borrow-confirm-button-hover: #7e472c;
 }
 
 body{
@@ -62,6 +64,22 @@ body{
     background-color: transparent;
     border: 2px solid var(--geometric-color);
     color: black;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-confirm{
+    background-color: var(--borrow-confirm-button) !important;
+    border: 2px solid var(--borrow-confirm-button);
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-confirm:hover{
+    background-color: var(--borrow-confirm-button-hover) !important;
+    border: 2px solid var(--borrow-confirm-button-hover);
+    color: white;
     border-radius: 5px;
     text-decoration: none;
 }
@@ -124,10 +142,21 @@ body{
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
 }
+.text-clamp-oneLine{
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
 
 .img-cover{
     width: 40%;
     height: 16rem;
+}
+
+.img-main{
+    height: 5rem !important;
+    width: 5rem !important;
 }
 
 .static-height{
@@ -249,6 +278,7 @@ ul img{
     .navbar-icon{
         display: none;
     }
+
 
 
 }

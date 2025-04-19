@@ -7,7 +7,7 @@
         <div class="col-md-9 col-lg-6 col-xl-6 col-xxl-4 mb-4">
             <div class="shadow rounded-4 bg-color py-4 px-4">
                 <img src="<?php echo ROOT_URL.$item['image'];?>" alt="<?php echo $item['title']?>" class="img-fluid img-borrow rounded-2 object-fit-cover">
-                <h3 class="mt-3"><?php echo $item['title'];?></h3>
+                <h3 class="mt-3 text-clamp-oneLine"><?php echo $item['title'];?></h3>
                 <h6><?php echo $item['author'];?></h6>
                 <p>Genre: <?php echo $item['genre']?></p>
                 <a class="btn btn-primary-color shadow w-100" href="<?php echo ROOT_PATH; ?>borrow/show/<?php echo $item['ID']?>">Show</a>
@@ -15,8 +15,8 @@
                     <?php if ($item['isBorrowed']):?>
                         <a class="btn btn-primary-outline shadow w-100" href="<?php echo ROOT_PATH; ?>borrow/unborrow/<?php echo $item['ID']?>">Unborrow</a>
                     <?php else:?>
-                        <a class="btn btn-secondary-outline shadow w-50 w-sm-100" href="<?php echo ROOT_PATH; ?>myLibrary/edit/<?php echo $item['ID']?>">Edit</a>
-                        <button class="btn btn-primary-outline shadow w-50 w-sm-100" data-bs-toggle="modal" data-bs-target="#modalToDelete-<?php echo $item['ID']?>">Delete</button>
+                        <a class="btn btn-secondary-outline shadow w-lg-50 w-100" href="<?php echo ROOT_PATH; ?>myLibrary/edit/<?php echo $item['ID']?>">Edit</a>
+                        <button class="btn btn-primary-outline shadow  w-lg-50 w-100" data-bs-toggle="modal" data-bs-target="#modalToDelete-<?php echo $item['ID']?>">Delete</button>
                     <?php endif; ?>
                 </div>
             </div>
