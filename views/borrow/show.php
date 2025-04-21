@@ -48,28 +48,44 @@
 
 <div id="carouselOfBooks" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner" data-bs-interval="10000">
-        <div class="carousel-item active">
-            <?php if (!empty($viewmodel['relatedBooks'])): ?>
-                <div class="mt-5">
-                    <h2>Related Books</h2>
-                </div>
-            <?php endif; ?>
-            <div class="d-flex flex-wrap justify-content-sm-center justify-content-xl-start">
-                <?php foreach ($viewmodel['relatedBooks'] as $item):?>
-                    <div class="col-12 col-sm-9 col-md-12 col-lg-5 col-xl-3 mb-4 me-3 mt-2"">
-                        <div class="bg-color text-clamp shadow text-align-justify px-3 pb-2 rounded">
-                            <a href="<?php echo ROOT_PATH; ?>borrow/show/<?=$item['ID']?>" class="text-decoration-none text-black d-block" target="_self">
-                                <div class="mt-4">
-                                    <img src="<?php echo ROOT_PATH.$item['image'];?>" alt="" class="img-fluid img-details p-2 rounded-2 object-fit-cover">
-                                    <h6 class="text-center"><?php echo $item['title']?></h6>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+
+        <?php if (!empty($viewmodel['relatedBooks'])): ?>
+            <div class="mt-5">
+                <h2>Related Books</h2>
             </div>
-        </div>
+        <?php endif; ?>
+        <!-- Pagination -->
+        <?php $chunks = array_chunk($viewmodel['relatedBooks'], 2);
+        foreach ($chunks as $index => $bookGroup): ?>
+            <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                <div class="d-flex flex-wrap justify-content-center">
+                    <?php foreach ($bookGroup as $item): ?>
+                        <div class="col-12 col-sm-5 col-md-5  col-xl-4 mb-4 me-3 mt-2">
+                            <div class="bg-color text-clamp shadow text-align-justify px-3 pb-2 rounded">
+                                <a href="<?php echo ROOT_PATH; ?>borrow/show/<?= $item['ID'] ?>" class="text-decoration-none text-black d-block" target="_self">
+                                    <div class="mt-4">
+                                        <img src="<?php echo ROOT_PATH . $item['image']; ?>" alt="" class="img-fluid img-details p-2 rounded-2 object-fit-cover">
+                                        <h6 class="text-center"><?php echo $item['title'] ?></h6>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+
     </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselOfBooks" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselOfBooks" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
 
 
 </div>

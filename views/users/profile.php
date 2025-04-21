@@ -3,7 +3,7 @@
     <!-- Image of the user with input to change it-->
     <div class="bg-color rounded-2 div-details p-1 shadow">
         <?php if (isset($_SESSION['user_data']['image'])): ?>
-            <img src="<?php echo ROOT_URL.$_SESSION['user_data']['image']; ?>" alt="" class="img-fluid img-details p-2 rounded-2 object-fit-cover ">
+            <img src="<?php echo ROOT_URL.$viewmodel['userData']['image']; ?>" alt="" class="img-fluid img-details p-2 rounded-2 object-fit-cover ">
         <?php else: ?>
             <img src="<?php echo ROOT_URL;?>assets/images/defaultProfile.jpg" alt="Default profile icon" class="img-fluid img-details p-2 rounded-2 object-fit-cover">
         <?php endif ?>

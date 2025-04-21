@@ -15,6 +15,7 @@
            return $this->single();
        }
 
+
        public function delete($id = null)
        {
            $this->query("DELETE FROM book where ID=$id");
@@ -28,9 +29,9 @@
            $this->execute();
            $result = $this->single();
 
-           if ($result> 0){
-               $this->query("SELECT * FROM book WHERE genre = '$genre' AND ID not in (SELECT ID FROM book WHERE ID = $id OR title = :title AND author = :author)");
-               $this->bind(':title', $result['title']);
+           if ($result > 0){
+               $this->query("SELECT * FROM book WHERE genre = :genre AND title NOT IN (SELECT title FROM book WHERE author = :author) GROUP BY title;");
+               $this->bind(':genre', $genre);
                $this->bind(':author', $result['author']);
                $rows = $this->resultSet();
                return ($rows);

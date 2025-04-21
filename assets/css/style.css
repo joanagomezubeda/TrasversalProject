@@ -92,6 +92,8 @@ body{
     background-color: var(--aside-color);
 }
 
+
+
 .asideLeft {
     left: 0;
 }
@@ -133,7 +135,7 @@ body{
 
 .img-borrow{
     width: 100% !important;
-    height: 17rem !important;
+    height: 15rem !important;
 }
 
 .text-clamp{
@@ -151,8 +153,10 @@ body{
 
 .img-cover{
     width: 40%;
-    height: 16rem;
+    height: 18rem;
 }
+
+
 
 .img-main{
     height: 5rem !important;
@@ -241,6 +245,13 @@ ul img{
     display: none !important;
 }
 
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(100%) !important;
+}
+
+
+
 @media (max-width: 768px){
     aside{
         display: none;
@@ -278,10 +289,9 @@ ul img{
     .navbar-icon{
         display: none;
     }
-
-
-
 }
+
+
 
 @media(max-width: 1400px){
     .img-cover{
@@ -292,8 +302,11 @@ ul img{
         width: 80% !important;
     }
 
-
     .userDiv p{
+        display: none;
+    }
+
+    .span-class{
         display: none;
     }
 }

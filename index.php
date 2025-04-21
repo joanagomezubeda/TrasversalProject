@@ -17,6 +17,7 @@
     require('controllers/myLibrary.php');
     require('controllers/community.php');
     require('controllers/lendZone.php');
+    require('controllers/dashboard.php');
 
     require('models/home.php');
     require('models/user.php');
@@ -24,6 +25,7 @@
     require('models/myLibrary.php');
     require('models/community.php');
     require('models/lendZone.php');
+    require('models/dashboard.php');
 
 
 

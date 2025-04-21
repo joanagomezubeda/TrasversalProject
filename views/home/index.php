@@ -16,7 +16,7 @@
             <div class="mx-4 text-justify">
                 <h5 class="fw-bold">Discover Mystery books!</h5>
                 <p>Mystery literature is all about suspense, secrets, and solving puzzles. These stories usually follow a detective or amateur sleuth working to uncover the truth behind a crime or strange event.</p>
-                <p>Clues and unexpected twists keep readers guessing until the very end. </p>
+                <p>Clues keep readers guessing until the very end. </p>
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
             <div class="mx-4 text-justify">
                 <h5 class="fw-bold">Discover Fiction books!</h5>
                 <p>Fiction explores imaginative worlds shaped by advanced technology, futuristic settings, or alternative realities. These stories ask big "what if" questions about humanity.</p>
-                <p>Aliens, robots, and distant planets are just some of the thrilling elements you’ll find. </p>
+                <p>Aliens, time travel, robots, and distant planets are just some of the thrilling elements you’ll find in sci-fi adventures. </p>
             </div>
         </div>
     </div>

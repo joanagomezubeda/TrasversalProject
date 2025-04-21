@@ -7,9 +7,9 @@
         <div class="col-md-9 col-lg-6 col-xl-6 col-xxl-4 mb-4">
             <div class="shadow rounded-4 bg-color py-4 px-4">
                 <img src="<?php echo ROOT_URL.$item['image'];?>" alt="<?php echo $item['title']?>" class="img-fluid img-borrow rounded-2 object-fit-cover">
-                <h3 class="mt-3 text-clamp-oneLine"><?php echo $item['title'];?></h3>
+                <h4 class="mt-3 text-clamp-oneLine fw-bold"><?php echo $item['title'];?></h4>
                 <h6><?php echo $item['author'];?></h6>
-                <p>Genre: <?php echo $item['genre']?></p>
+                <p class="fw-light">Genre: <?php echo $item['genre']?></p>
                 <a class="btn btn-primary-color shadow w-100" href="<?php echo ROOT_PATH; ?>borrow/show/<?php echo $item['ID']?>">Show</a>
                 <div class="d-flex justify-content-center gap-4 flex-sm-row flex-column mt-3">
                     <?php if ($item['isBorrowed']):?>

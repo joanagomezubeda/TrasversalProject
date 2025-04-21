@@ -10,12 +10,12 @@
                 <!-- Title -->
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
                     <label for="title">Title</label>
-                    <input type="text" value="<?php echo $viewmodel['title'] ?> " name="title" class="form-control form-border" id="title" required>
+                    <input type="text" value="<?php echo $viewmodel['title'] ?> " name="title" class="form-control form-border" id="title" >
                 </div>
                 <!-- Author -->
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 mt-3 mt-xl-0">
                     <label for="author">Author</label>
-                    <input type="text" value="<?php echo $viewmodel['author'] ?> " name="author" class="form-control form-border" id="author" required>
+                    <input type="text" value="<?php echo $viewmodel['author'] ?> " name="author" class="form-control form-border" id="author" >
                 </div>
             </div>
             <!-- Editorial and Genre -->
@@ -23,18 +23,18 @@
                 <!-- Editorial -->
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 mt-3 mt-xl-0">
                     <label for="editorial">Editorial</label>
-                    <input type="text" value="<?php echo $viewmodel['editorial'] ?> " class="form-control form-border" id="editorial" name="editorial" required>
+                    <input type="text" value="<?php echo $viewmodel['editorial'] ?> " class="form-control form-border" id="editorial" name="editorial" >
                 </div>
                 <!-- Genre -->
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 mt-3 mt-lg-0">
                     <label for="genre">Genre</label>
-                    <input type="text" value="<?php echo $viewmodel['genre'] ?> " name="genre" class="form-control form-border" id="genre" required>
+                    <input type="text" value="<?php echo $viewmodel['genre'] ?> " name="genre" class="form-control form-border" id="genre" >
                 </div>
             </div>
             <!-- Description -->
             <div class="mt-3">
                 <label for="description">Description</label>
-                <textarea name="description" id="description" cols="10" rows="5" class="form-border form-control" required><?php echo $viewmodel['description'] ?></textarea>
+                <textarea name="description" id="description" cols="10" rows="5" class="form-border form-control" ><?php echo $viewmodel['description'] ?></textarea>
             </div>
 
             <!-- Image -->

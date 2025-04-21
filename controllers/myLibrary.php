@@ -20,6 +20,7 @@
             }
 
             $id = $this->request['id'];
+
             $viewmodel = new MyLibraryModel();
             $this->ReturnView($viewmodel->edit($id), true);
         }

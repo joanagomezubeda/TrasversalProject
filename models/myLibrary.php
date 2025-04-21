@@ -75,38 +75,46 @@
                 }
 
                 try {
-                    // Var from de select of the form
-                    $lendTheBook = $post['lendTheBook'];
-                    $userId = $_SESSION['user_data']['id'];
-                    // Insert into MySQL
-                    $this->query("INSERT INTO book(title, description, author, editorial, genre, image,toLend,id_user) VALUES(:title, :description, 
+                    $this->query("SELECT COUNT(*) FROM book WHERE id_user = $id");
+                    $totalBooks = $this->resultSet();
+
+                    if (!$totalBooks > 50){
+                        $lendTheBook = $post['lendTheBook'];
+                        $userId = $_SESSION['user_data']['id'];
+                        // Insert into MySQL
+                        $this->query("INSERT INTO book(title, description, author, editorial, genre, image,toLend,id_user) VALUES(:title, :description, 
                      :author, :editorial, :genre ,:image,:toLend, :id_user)");
-                    $this->bind(':title', $post['title']);
-                    $this->bind(':description', $post['description']);
-                    $this->bind(':author', $post['author']);
-                    $this->bind(':editorial', $post['editorial']);
-                    $this->bind(':genre', $post['genre']);
-                    $this->bind(':image', $imageToSave);
-                    $this->bind(':id_user', $userId);
+                        $this->bind(':title', $post['title']);
+                        $this->bind(':description', $post['description']);
+                        $this->bind(':author', $post['author']);
+                        $this->bind(':editorial', $post['editorial']);
+                        $this->bind(':genre', $post['genre']);
+                        $this->bind(':image', $imageToSave);
+                        $this->bind(':id_user', $userId);
 
 
-                    // If the user said "yes"
-                    if ($lendTheBook === 'yes'){
-                        /*
-                        $this->query('INSERT INTO lend(user_id, book_id, lend_date) VALUES(:user_id, :book_id, :lend_date)');
-                        $this->bind(':user_id', $userId);
-                        $this->bind(':book_id', $bookId );
-                        $this->bind(':lend_date', date("Y-m-d"));
-                        $this->execute();
-                        */
-                        $this->bind(':toLend', 1);
-                        $this->execute();
+                        // If the user said "yes"
+                        if ($lendTheBook === 'yes'){
+                            /*
+                            $this->query('INSERT INTO lend(user_id, book_id, lend_date) VALUES(:user_id, :book_id, :lend_date)');
+                            $this->bind(':user_id', $userId);
+                            $this->bind(':book_id', $bookId );
+                            $this->bind(':lend_date', date("Y-m-d"));
+                            $this->execute();
+                            */
+                            $this->bind(':toLend', 1);
+                            $this->execute();
+                        } else {
+                            $this->bind(':toLend', 0);
+                            $this->execute();
+                        }
+
+                        header('Location:'.ROOT_URL.'myLibrary');
                     } else {
-                        $this->bind(':toLend', 0);
-                        $this->execute();
+                        Messages::setMessage('You can only add 50 books to your library!', 'error');
                     }
+                    // Var from de select of the form
 
-                    header('Location:'.ROOT_URL.'myLibrary');
                 } catch (\Exception $e){
                     Messages::setMessage($e->getMessage(), 'error');
                 }
