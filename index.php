@@ -18,6 +18,8 @@
     require('controllers/community.php');
     require('controllers/lendZone.php');
     require('controllers/dashboard.php');
+    require('controllers/politics.php');
+    require('controllers/miscellaneus.php');
 
     require('models/home.php');
     require('models/user.php');
@@ -26,6 +28,8 @@
     require('models/community.php');
     require('models/lendZone.php');
     require('models/dashboard.php');
+    require('models/politics.php');
+    require('models/miscellaneus.php');
 
 
 

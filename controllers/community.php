@@ -19,6 +19,10 @@
 
         protected function show()
         {
+            if(!isset($_SESSION['is_logged_in'])){
+                header('Location: '.ROOT_URL);
+            }
+
             $id = $this->request['id'];
             $userId = $_SESSION['user_data']['id'];
             $viewmodel = new CommunityModel();

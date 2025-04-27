@@ -31,6 +31,11 @@
                 <?php if(isset($_SESSION['is_logged_in'])): ?>
                     <div class=" d-lg-none mt-3">
                         <ul class="navbar-nav">
+                            <?php if ($_SESSION['user_data']['rol'] === 'admin'):?>
+                                <li>
+                                    <a href="<?php echo ROOT_URL;?>dashboard" class="ms-2 fw-semibold">Dashboard</a>
+                                </li>
+                            <?php endif;?>
                             <li class="nav-item">
                                 <a href="<?php echo ROOT_URL;?>" class="nav-link">Explore</a>
                             </li>
@@ -40,12 +45,17 @@
                             <li class="nav-item">
                                 <a href="<?php echo ROOT_URL;?>myLibrary" class="nav-link">My Library</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a href="<?php echo ROOT_URL;?>lendZone" class="nav-link">Lend Zone</a>
+                            </li>
                             <li class="nav-item">
                                 <a href="<?php echo ROOT_URL;?>community" class="nav-link">Community</a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?php echo ROOT_URL?>users/profile/<?php echo $_SESSION['user_data']['id'];?>" class="nav-link">My Profile</a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="<?php echo ROOT_PATH;?>users/logout">Logout</a>
                             </li>
@@ -75,7 +85,7 @@
                             <?php if (isset($_SESSION['user_data']['image'])): ?>
                                 <img src="<?php echo ROOT_URL.$_SESSION['user_data']['image'] ?>" alt="Profile image" class="profile-image rounded-circle object-fit-cover img-fluid mt-1">
                             <?php else: ?>
-                                <img src="<?php echo ROOT_URL;?>assets/images/defaultProfile.jpg" alt="Default profile icon" class="profile-image rounded-circle object-fit-cover img-fluid">
+                                <img src="<?php echo ROOT_URL;?>assets/userImages/defaultProfile.jpg" alt="Default profile icon" class="profile-image rounded-circle object-fit-cover img-fluid">
                             <?php endif ?>
                             <div class="text-wrap">
                                 <p class="mx-3 fw-bold without-margin">Welcome <?php echo $_SESSION['user_data']['name']; ?></p>
@@ -142,7 +152,7 @@
 
 <aside class="asideRight">
     <div class="d-sm-none d-lg-none d-xl-block">
-        <?php if(isset($_SESSION['is_logged_in'])): ?>
+        <?php if(isset($_SESSION['is_logged_in']) && count($book) > 0): ?>
             <div class="d-flex justify-content-center mt-4">
                 <div class="w-75 justify-content-center">
                     <h3 class="fw-bolder mt-3">Currently Reading</h3>
@@ -181,7 +191,7 @@
 
 <!-- Main with the views  -->
 
-<main>
+<main class="min-vh-100"">
     <div class="container body-animation">
         <div class="row d-flex justify-content-center mt-4 ">
             <div class="row ">
@@ -192,8 +202,17 @@
 </main>
 
 
-<!--<footer class="d-flex justify-content-center mt-4 pt-3">-->
-<!--    <p>&copy 2025 Joana</p>-->
-<!--</footer>-->
+<footer class="d-flex justify-content-center mt-4 pt-3 bottom-0">
+    <div class="text-center">
+        <div class="d-flex justify-content-center">
+            <a href="<?php echo ROOT_URL; ?>politics/privatePolitics" class="a-brown">Private Politics</a>
+            <span class="mx-1">·</span>
+            <a href="<?php echo ROOT_URL; ?>politics/cookies" class="a-brown">Cookies Politics</a>
+        </div>
+        <p class="m-1" >Connecting readers, sharing stories. Join our community and discover a world where books aren't just read — they're shared!</p>
+        <p class="m-1">Made with ❤ by book lovers. </p>
+        <p class="m-1 mb-3">&copy <?php echo date("Y")?> BookLends. All rights reserved.</p>
+    </div>
+</footer>
 </body>
 </html>

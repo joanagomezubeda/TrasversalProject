@@ -84,10 +84,9 @@
 <?php endif; ?>
 
 <!-- Comments associated to the publication -->
-<div class="d-flex justify-content-center">
-    <div class="mt-2 w-75">
+<div class="d-flex justify-content-center row">
+    <div class="mt-2 col-12 col-xl-10 ">
         <?php foreach ($viewmodel['comments'] as $item): ?>
-
             <div class="bg-color shadow rounded-3 mt-4 p-3">
                 <div class="d-flex align-content-center">
                     <img src="<?php echo ROOT_URL.$_SESSION['user_data']['image']?>" alt="User profile of <?php echo $_SESSION['user_data']['name']?>" class="rounded-circle icon-image ">

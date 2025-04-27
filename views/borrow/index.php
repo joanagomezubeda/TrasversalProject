@@ -9,11 +9,11 @@
                 <p class="text-clamp"><?php echo $item['description'];?></p>
                 <div class="d-flex justify-content-center gap-4 flex-sm-row flex-column">
                     <?php if ($_SESSION['user_data']['address']): ?>
-                        <a class="btn btn-primary-color shadow w-50 w-sm-100" href="<?php echo ROOT_PATH; ?>borrow/borrowBook/<?=$item['ID']?>">Borrow</a>
+                        <a class="btn btn-primary-color shadow col-12 col-xl-6" href="<?php echo ROOT_PATH; ?>borrow/borrowBook/<?=$item['ID']?>">Borrow</a>
                     <?php else: ?>
-                        <button class="btn btn-primary-color shadow w-50 w-sm-100" data-bs-toggle="modal" data-bs-target="#modalToBorrow-<?php echo $item['ID']?>">Borrow</button>
+                        <button class="btn btn-primary-color shadow col-12 col-xl-6" data-bs-toggle="modal" data-bs-target="#modalToBorrow-<?php echo $item['ID']?>">Borrow</button>
                     <?php endif; ?>
-                    <a class="btn btn-primary-color shadow w-50 w-sm-100" href="<?php echo ROOT_PATH; ?>borrow/show/<?=$item['ID']?>">See More</a>
+                    <a class="btn btn-primary-color shadow col-12 col-xl-6" href="<?php echo ROOT_PATH; ?>borrow/show/<?=$item['ID']?>">See More</a>
                 </div>
             </div>
         </div>

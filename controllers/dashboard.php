@@ -38,6 +38,7 @@ class Dashboard extends Controller {
 
     protected function editComment()
     {
+
         $commentId = $this->request['id'];
         $viewModel = new DashboardModel();
         $comment = $viewModel->getComment($commentId);

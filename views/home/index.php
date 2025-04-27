@@ -1,6 +1,6 @@
 <!--Las cuatro tarjetas principales-->
     <div class="col-12 col-lg-6 mb-4">
-        <div class="shadow rounded-4 bg-color d-flex py-3">
+        <div class="shadow rounded-4 bg-color d-flex py-3 ">
             <img src="<?php echo ROOT_URL;?>assets/images/prince.png" alt="" class="img-fluid img-cover rounded-2 ms-4 object-fit-cover">
             <div class="mx-4 text-justify">
                 <h5 class="fw-bold">Discover Fantasy books!</h5>
@@ -11,7 +11,7 @@
     </div>
 
     <div class="col-12 col-lg-6 mb-4">
-        <div class="shadow rounded-4 bg-color d-flex py-3">
+        <div class="shadow rounded-4 bg-color d-flex py-3 ">
             <img src="<?php echo ROOT_URL;?>assets/bookImages/agathaChristie.jpg" alt="" class="img-fluid img-cover rounded-2 ms-4 object-fit-cover">
             <div class="mx-4 text-justify">
                 <h5 class="fw-bold">Discover Mystery books!</h5>
@@ -22,7 +22,7 @@
     </div>
 
     <div class="col-12 col-lg-6 mb-4">
-        <div class="shadow rounded-4 bg-color d-flex py-3">
+        <div class="shadow rounded-4 bg-color d-flex py-3 ">
             <img src="<?php echo ROOT_URL;?>assets/bookImages/theMapOfLonging.jpg" alt="" class="img-fluid img-cover object-fit-cover rounded-2 ms-4">
             <div class="mx-4 text-justify">
                 <h5 class="fw-bold">Discover Romance books!</h5>
@@ -38,7 +38,7 @@
             <div class="mx-4 text-justify">
                 <h5 class="fw-bold">Discover Fiction books!</h5>
                 <p>Fiction explores imaginative worlds shaped by advanced technology, futuristic settings, or alternative realities. These stories ask big "what if" questions about humanity.</p>
-                <p>Aliens, time travel, robots, and distant planets are just some of the thrilling elements you’ll find in sci-fi adventures. </p>
+                <p>Aliens and distant planets are just some of the thrilling elements you’ll find in sci-fi adventures. </p>
             </div>
         </div>
     </div>
@@ -78,8 +78,8 @@
 
 <!-- Buttons -->
 <div class="d-flex justify-content-center mt-4">
-    <a class="btn-primary-color shadow me-3 px-3 py-2" href="<?php echo ROOT_URL?>contactUs">Contact Us</a>
-    <a class="btn-primary-color shadow px-3 py-2" href="<?php echo ROOT_URL?>us">Known Us</a>
+    <a class="btn-primary-color shadow me-3 px-3 py-2" href="<?php echo ROOT_URL?>miscellaneus/contactUs">Contact Us</a>
+    <a class="btn-primary-color shadow px-3 py-2" href="<?php echo ROOT_URL?>miscellaneus/knowUs">About Us</a>
 </div>
 
 <!-- Connect With Other Readers -->

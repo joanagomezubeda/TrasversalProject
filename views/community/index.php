@@ -31,7 +31,9 @@
                         <img src="<?php echo ROOT_URL.$item['publication_image'] ?>" class="img-fluid img-publication object-fit-cover rounded-3" alt="<?php echo $item['name']?>">
                     <?php endif;?>
                 </div>
+                <p class="mt-3 mx-2"><i class="bi bi-chat-heart-fill fs-4"></i></p>
             </div>
+
         </a>
 
     <?php endforeach; ?>

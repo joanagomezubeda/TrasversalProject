@@ -33,8 +33,11 @@
                 $city = $completeAddress[1];
                 $province = $completeAddress[2];
 
+                //Profile image
+                $image = 'assets/userImages/defaultProfile.jpg';
+
                 // Insert into MySQL
-                $this->query('INSERT INTO user(name, email, password, surname, rol, address, city, province) VALUES(:name, :email, :password, :surname, :rol, :address, :city, :province)');
+                $this->query('INSERT INTO user(name, email, password, surname, rol, image, address, city, province) VALUES(:name, :email, :password, :surname, :rol, :image, :address, :city, :province)');
                 $this->bind(':name', $name);
                 $this->bind(':email', $post['email']);
                 $this->bind(':password', $password);
@@ -43,6 +46,7 @@
                 $this->bind(':address', $address);
                 $this->bind(':city', $city);
                 $this->bind(':province', $province);
+                $this->bind(':image', $image);
                 $this->execute();
 
                 // Verify

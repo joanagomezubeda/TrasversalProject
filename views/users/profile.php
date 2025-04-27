@@ -50,6 +50,7 @@
             <div class="mt-3">
                 <button class="btn btn-primary-color w-100 mb-2" name="submit" type="submit" >Update</button>
             </div>
+        </form>
     </div>
 
 </div>
