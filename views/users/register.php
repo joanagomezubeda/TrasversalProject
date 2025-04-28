@@ -1,9 +1,9 @@
 
 <div class="mt-5 d-flex justify-content-center">
-    <div class="mx-5 session-forms d-flex justify-content-center pb-4">
-        <div class="w-50 py-5">
+    <div class="mx-5 d-flex justify-content-center pb-4 row col-12 col-xl-6 bg-color rounded-4">
+        <div class=" py-5">
             <h1 class="text-center mb-4 fw-bold">Register User!</h1>
-            <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
+            <form action="<?php $_SERVER['PHP_SELF']?>" method="post" class="px-5">
                 <?php Messages::display(); ?>
                 <div class="form-group">
                     <label for="completeName">Complete Name</label>

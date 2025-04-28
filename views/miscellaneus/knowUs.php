@@ -18,7 +18,7 @@
             </p>
         </div>
     </div>
-    <div class="d-flex mt-4 row justify-content-center  justify-content-xxl-start ms-1">
+    <div class="d-flex mt-4 row ">
         <div class="col-12">
             <h3><span><i class="bi bi-suit-heart-fill me-2"></i></span>Our Mission</h3>
             <p>At BookLends, our mission is simple but powerful: <strong>To connect readers through the books they love — and create a world where every story finds a new home.</strong></p>

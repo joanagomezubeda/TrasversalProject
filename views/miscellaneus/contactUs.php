@@ -8,13 +8,13 @@
                 <!-- Name -->
                 <div class="col-12 form-group ">
                     <label for="completeName">Complete Name *</label>
-                    <input type="text" value="<?php echo $_SESSION['user_data']['name'].' '.$_SESSION['user_data']['surname']?>" name="completeName" class="form-control form-border" id="completeName">
+                    <input type="text" placeholder="John Doe" name="completeName" class="form-control form-border" id="completeName">
                 </div>
 
                 <!-- Email -->
                 <div class="col-12 form-group ">
                     <label for="completeName">Email *</label>
-                    <input type="text" value="<?php echo $_SESSION['user_data']['email']?>" name="completeName" class="form-control form-border" id="completeName">
+                    <input type="text" placeholder="your@email.com" name="completeName" class="form-control form-border" id="completeName">
                 </div>
 
                 <!-- Subject -->

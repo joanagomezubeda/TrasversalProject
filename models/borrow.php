@@ -3,11 +3,39 @@
        public function index()
        {
            $userId = $_SESSION['user_data']['id'];
-           $this->query("SELECT * FROM book WHERE id_user != $userId AND ( ID not in (SELECT book_id FROM lend) OR ID NOT IN (SELECT lend.BOOK_ID from lend where return_date > current_date()))");
-           $rows = $this->resultSet();
-           return($rows);
+           $elementsPage = 6;
+           $actualPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
+           $start = ($actualPage - 1) * $elementsPage;
+           if ($start < 0) {
+               $start = 0;
+           }
+            // Get all books of the user
+           $this->query("SELECT * FROM book WHERE id_user != :userId 
+                AND (ID NOT IN (SELECT book_id FROM lend) 
+                OR ID NOT IN (SELECT lend.BOOK_ID FROM lend WHERE return_date > current_date()))
+                LIMIT :start, :elementsPage");
+           $this->bind(':userId',$userId);
+           $this->bind(':start', $start);
+           $this->bind(':elementsPage', $elementsPage);
+           $rows = $this->resultSet();
+
+           // Count them
+           $this->query("SELECT COUNT(*) AS total FROM book WHERE id_user != :userId 
+            AND (ID NOT IN (SELECT book_id FROM lend) 
+            OR ID NOT IN (SELECT lend.BOOK_ID FROM lend WHERE return_date > CURRENT_DATE()))");
+           $this->bind(':userId', $userId);
+           $total = $this->single()['total'];
+
+           return [
+               'books' => $rows,
+               'total' => $total,
+               'page' => $actualPage,
+               'elementsPage' => $elementsPage,
+               'start' => $start
+           ];
        }
+
 
        public function show($id = null)
        {

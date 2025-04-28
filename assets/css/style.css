@@ -120,6 +120,27 @@ body{
     width: 60% !important;
 }
 
+.page-link{
+    color: var(--secondary-color);
+}
+
+.page-link:hover {
+    color: var(--secondary-color) !important;
+}
+
+.page-link.active:hover, .active:hover > .page-link:hover  {
+    color: white !important;
+}
+
+.page-link.active, .active > .page-link{
+    background-color: var(--secondary-color) !important;
+    border: var(--secondary-color) !important;
+}
+
+.page-item:not(:first-child) .page-link .page-item:not(:last-child){
+    color: var(--secondary-color);
+}
+
 .form-border{
     border: 2px solid var(--primary-color);
 }

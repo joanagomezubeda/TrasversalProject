@@ -2,8 +2,16 @@
 
     class MyLibraryModel extends Model {
 
+
         public function index($userId)
         {
+            $elementsPage = 6;
+            $actualPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+            $start = ($actualPage - 1) * $elementsPage;
+            if ($start < 0) {
+                $start = 0;
+            }
             $this->query("
                 SELECT book.*, 
                        CASE 
@@ -13,10 +21,25 @@
                 FROM book 
                 LEFT JOIN lend ON book.ID = lend.book_id AND lend.borrow_user_id = $userId
                 WHERE book.id_user = $userId OR lend.borrow_user_id = $userId
-                GROUP BY book.ID
+                GROUP BY book.ID LIMIT :start, :elementsPage
             ");
 
-            return $this->resultSet();
+            $this->bind(':start', $start);
+            $this->bind(':elementsPage', $elementsPage);
+            $rows = $this->resultSet();
+
+            $this->query("SELECT COUNT(*) as total FROM book 
+                LEFT JOIN lend ON book.ID = lend.book_id AND lend.borrow_user_id = $userId
+                WHERE book.id_user = $userId OR lend.borrow_user_id = $userId");
+            $total = $this->single()['total'];
+
+            return [
+                'books' => $rows,
+                'total' => $total,
+                'page' => $actualPage,
+                'elementsPage' => $elementsPage,
+                'start' => $start
+            ];
         }
 
         public function edit($id = null)

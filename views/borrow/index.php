@@ -1,6 +1,6 @@
 <?php Messages::display();?>
 <div class="row d-flex justify-content-sm-center justify-content-lg-start">
-    <?php foreach ($viewmodel as $item): ?>
+    <?php foreach ($viewmodel['books'] as $item): ?>
         <div class="col-md-9 col-lg-6 col-xl-6 col-xxl-4 mb-4">
             <div class="shadow rounded-4 bg-color py-4 px-4">
                 <img src="<?php echo ROOT_URL.$item['image'];?>" alt="<?php echo $item['title']?>" class="img-fluid img-borrow rounded-2 object-fit-cover">
@@ -39,3 +39,36 @@
 
 </div>
 
+<?php
+    $totalPages = ceil($viewmodel['total'] / $viewmodel['elementsPage']);
+    $actualPage = $viewmodel['page'];
+
+    $queryParams = $_GET;
+    unset($queryParams['page']);
+    $baseURL = '?' . http_build_query($queryParams);
+
+?>
+
+<nav aria-label="pagination">
+    <ul class="pagination justify-content-center">
+
+        <?php if ($actualPage > 1): ?>
+            <li class="page-item">
+                <a class="page-link" href="<?= $baseURL ?>&page=<?= $actualPage - 1 ?>">Previous</a>
+            </li>
+        <?php endif; ?>
+
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <li class="page-item <?= $i == $actualPage ? 'active' : '' ?>">
+                <a class="page-link" href="<?= $baseURL ?>&page=<?= $i ?>"><?= $i ?></a>
+            </li>
+        <?php endfor; ?>
+
+        <?php if ($actualPage < $totalPages): ?>
+            <li class="page-item">
+                <a class="page-link" href="<?= $baseURL ?>&page=<?= $actualPage + 1 ?>">Next</a>
+            </li>
+        <?php endif; ?>
+
+    </ul>
+</nav>
