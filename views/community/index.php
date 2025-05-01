@@ -23,7 +23,7 @@
             <div class="bg-color shadow rounded-3 mt-4 p-3">
                 <div class="d-flex align-content-center">
                     <img src="<?php echo $item['image']?>" alt="User profile of <?php echo $item['username']?>" class="rounded-circle icon-image ">
-                    <h6 class="align-content-center mt-2 ms-2 "><?php echo $item['name']?></h6>
+                    <h6 class="align-content-center mt-2 ms-2 "><?php echo $item['username']?></h6>
                 </div>
                 <div class="mt-4 ms-2">
                     <p class="text-clamp"><?php echo $item['description'] ?></p>

@@ -39,7 +39,7 @@
             <div class="bg-color shadow rounded-3 p-3">
                 <div class="d-flex align-content-center">
                     <img src="<?php echo ROOT_URL.$viewmodel['publication']['image']?>" alt="User profile of <?php echo $viewmodel['publication']['name']?>" class="rounded-circle icon-image ">
-                    <h6 class="align-content-center mt-2 ms-2 "><?php echo $viewmodel['publication']['name']?></h6>
+                    <h6 class="align-content-center mt-2 ms-2 "><?php echo $viewmodel['publication']['username']?></h6>
                 </div>
                 <div class="mt-4 ms-2">
                     <p><?php echo $viewmodel['publication']['description'] ?></p>
@@ -89,9 +89,9 @@
         <?php foreach ($viewmodel['comments'] as $item): ?>
             <div class="bg-color shadow rounded-3 mt-4 p-3">
                 <div class="d-flex align-content-center">
-                    <img src="<?php echo ROOT_URL.$item['profileImage']?>" alt="User profile of <?php echo $item['name']?>" class="rounded-circle icon-image ">
+                    <img src="<?php echo ROOT_URL.$item['profileImage']?>" alt="User profile of <?php echo $item['username']?>" class="rounded-circle icon-image ">
                     <div class="align-content-center mt-2 ms-2 d-flex">
-                        <h6 class="me-2"><?php echo $item['name']?></h6>
+                        <h6 class="me-2"><?php echo $item['username']?></h6>
                         <!-- Fuente: https://es.stackoverflow.com/questions/391540/cómo-calcular-tiempo-en-php-cuando-el-formato-es-datetime-->
                         <h6 ><?php echo (new DateTime($item['create_time']))->diff(new DateTime())->h + (new DateTime($item['create_time']))->diff(new DateTime())->days * 24; ?> h</h6>
                     </div>

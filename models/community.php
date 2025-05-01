@@ -95,12 +95,12 @@
                 } catch (\Exception $e){
                     Messages::setMessage($e->getMessage(), 'error');
                 }
-            /*
+
                 if ($this->lastInsertId()){
                     // Redirect
                     header('Location:'.ROOT_URL.'community');
                 }
-            */
+
             }
             return;
         }
@@ -155,12 +155,12 @@
                 } catch (\Exception $e){
                     Messages::setMessage($e->getMessage(), 'error');
                 }
-                /*
-                    if ($this->lastInsertId()){
-                        // Redirect
-                        header('Location:'.ROOT_URL.'community');
-                    }
-                */
+
+                if ($this->lastInsertId()){
+                    // Redirect
+                    header('Location:'.ROOT_URL.'community');
+                }
+
             }
             return;
         }
@@ -221,12 +221,12 @@
                 } catch (\Exception $e){
                     Messages::setMessage($e->getMessage(), 'error');
                 }
-                /*
-                    if ($this->lastInsertId()){
-                        // Redirect
-                        header('Location:'.ROOT_URL.'community');
-                    }
-                */
+
+                if ($this->lastInsertId()){
+                    // Redirect
+                    header('Location:'.ROOT_URL.'community');
+                }
+
             }
             return;
         }

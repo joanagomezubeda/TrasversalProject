@@ -62,7 +62,7 @@
             if(isset($post['submit'])) {
                 $password = md5($post['password']);
                 // Compare Login
-                $this->query('SELECT * FROM user WHERE email = :name OR username = :name AND password = :password');
+                $this->query('SELECT * FROM user WHERE (email = :name OR username = :name) AND password = :password');
                 $this->bind(':name', $post['name']);
                 $this->bind(':password', $password);
                 $row = $this->single();
