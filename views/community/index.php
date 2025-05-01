@@ -22,7 +22,7 @@
         <a href="<?php echo ROOT_URL?>community/show/<?php echo $item['ID']?>" class="text-black text-decoration-none">
             <div class="bg-color shadow rounded-3 mt-4 p-3">
                 <div class="d-flex align-content-center">
-                    <img src="<?php echo $item['image']?>" alt="User profile of <?php echo $item['name']?>" class="rounded-circle icon-image ">
+                    <img src="<?php echo $item['image']?>" alt="User profile of <?php echo $item['username']?>" class="rounded-circle icon-image ">
                     <h6 class="align-content-center mt-2 ms-2 "><?php echo $item['name']?></h6>
                 </div>
                 <div class="mt-4 ms-2">
@@ -40,10 +40,3 @@
 
 </div>
 
-
-<script>
-    // Verifica si hay un mensaje de error en la sesión
-    <?php if (isset($_SESSION['message']) && $_SESSION['message']['type'] == 'error') { ?>
-    console.error('Error: <?php echo addslashes($_SESSION['message']['text']); ?>');
-    <?php } ?>
-</script>

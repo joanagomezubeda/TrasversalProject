@@ -23,7 +23,7 @@
 
         public function getComments($id)
         {
-            $this->query("SELECT comment.*, user.image as profileImage, user.name FROM comment JOIN user ON comment.id_user = user.id WHERE id_publication = 1 ORDER BY comment.create_time DESC");
+            $this->query("SELECT comment.*, user.image as profileImage, user.username FROM comment JOIN user ON comment.id_user = user.id WHERE id_publication = 1 ORDER BY comment.create_time DESC");
             $rows = $this->resultSet();
             return($rows);
         }

@@ -32,12 +32,13 @@
                 $image = 'assets/userImages/defaultProfile.jpg';
 
                 // Insert into MySQL
-                $this->query('INSERT INTO user(name, email, password, surname, rol, image, address, city, province) VALUES(:name, :email, :password, :surname, :rol, :image, :address, :city, :province)');
+                $this->query('INSERT INTO user(name, email, password, surname, rol, image, address, city, province, username) VALUES(:name, :email, :password, :surname, :rol, :image, :address, :city, :province, :username)');
                 $this->bind(':name', $name);
                 $this->bind(':email', $post['email']);
                 $this->bind(':password', $password);
                 $this->bind(':surname', $surname);
                 $this->bind(':rol', $rol);
+                $this->bind(':username', $post['username']);
                 $this->bind(':address', $post['address']);
                 $this->bind(':city', $post['city']);
                 $this->bind(':province', $post['province']);
@@ -61,8 +62,8 @@
             if(isset($post['submit'])) {
                 $password = md5($post['password']);
                 // Compare Login
-                $this->query('SELECT * FROM user WHERE email = :email AND password = :password');
-                $this->bind(':email', $post['email']);
+                $this->query('SELECT * FROM user WHERE email = :name OR username = :name AND password = :password');
+                $this->bind(':name', $post['name']);
                 $this->bind(':password', $password);
                 $row = $this->single();
 
@@ -72,6 +73,7 @@
                         "name" => $row['name'],
                         "id" => $row['id'],
                         "email" => $row['email'],
+                        "username" => $row['username'],
                         "image" => $row['image'],
                         "surname" => $row['surname'],
                         "rol" => $row['rol'],
@@ -119,7 +121,7 @@
                 // Split of name and surname (Like a stringTokenizer)
                 $completeName = explode(' ', $post['completeName']);
                 $name = $completeName[0];
-                $surname = $completeName[1];
+                $surname = $completeName[1].' '.$completeName[2];
 
                 // Split of adress, city y province (Like a stringTokenizer)
                 $completeAddress = explode(',', $post['completeAddress']);
@@ -167,7 +169,7 @@
                 // Insert into MySQL
                 try {
                     $this->query("UPDATE user SET name = :name, surname = :surname, email = :email, password = :password, 
-                    address = :address, city = :city, province = :province, rol = :rol, image = :image WHERE id = :id");
+                    address = :address, city = :city, province = :province, rol = :rol, image = :image, username = :username WHERE id = :id");
                     $this->bind(':name', $name);
                     $this->bind(':email', $post['email']);
                     $this->bind(':image', $imageToSave);
@@ -177,6 +179,7 @@
                     $this->bind(':address', $address);
                     $this->bind(':city', $city);
                     $this->bind(':province', $province);
+                    $this->bind(':username', $post['username']);
                     $this->bind(':id', $id);
                     $this->execute();
                     //header('Location: ' . ROOT_URL);

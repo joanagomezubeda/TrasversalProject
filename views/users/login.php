@@ -5,8 +5,8 @@
             <form action="<?php $_SERVER['PHP_SELF']?>" method="post" class="px-5">
                 <?php Messages::display(); ?>
                 <div class="form-group  mt-3">
-                    <label for="email">Email</label>
-                    <input type="email" placeholder="username@gmail.com" name="email" class="form-control form-border" id="email">
+                    <label for="name">Email or username</label>
+                    <input type="text" placeholder="username@gmail.com" name="name" class="form-control form-border" id="name">
                 </div>
                 <div class="form-group mt-3">
                     <label for="password">Password</label>
