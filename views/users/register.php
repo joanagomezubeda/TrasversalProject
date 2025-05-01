@@ -18,8 +18,18 @@
                     <input type="password" placeholder="************" name="password" class="form-control form-border" id="password">
                 </div>
                 <div class="form-group mt-3">
-                    <label for="completeAddress">Complete address</label>
-                    <input type="text" placeholder="Street, City, Province" name="completeAddress" class="form-control form-border" id="completeAddress">
+                    <label for="address">Address</label>
+                    <input type="text" placeholder="Street" name="address" class="form-control form-border" id="address">
+                </div>
+                <div class="d-flex">
+                    <div class="form-group mt-3 col-6">
+                        <label for="city">City</label>
+                        <input type="text" placeholder="City" name="city" class="form-control form-border" id="city">
+                    </div>
+                    <div class="form-group mt-3 col-6">
+                        <label for="province">Province</label>
+                        <input type="text" placeholder="Province" name="province" class="form-control form-border" id="province">
+                    </div>
                 </div>
 
                 <div class="mt-3">

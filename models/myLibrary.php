@@ -9,6 +9,7 @@
             $actualPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
             $start = ($actualPage - 1) * $elementsPage;
+
             if ($start < 0) {
                 $start = 0;
             }
@@ -59,7 +60,7 @@
             return;
         }
 
-        public function add($id = null)
+        public function add($id)
         {
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING );
 
@@ -98,10 +99,10 @@
                 }
 
                 try {
-                    $this->query("SELECT COUNT(*) FROM book WHERE id_user = $id");
-                    $totalBooks = $this->resultSet();
+                    $this->query("SELECT COUNT(*) as totalBooks FROM book WHERE id_user = $id");
+                    $row = $this->single();
 
-                    if (!$totalBooks > 50){
+                    if ($row['totalBooks'] < 50){
                         $lendTheBook = $post['lendTheBook'];
                         $userId = $_SESSION['user_data']['id'];
                         // Insert into MySQL

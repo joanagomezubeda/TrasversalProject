@@ -89,9 +89,9 @@
         <?php foreach ($viewmodel['comments'] as $item): ?>
             <div class="bg-color shadow rounded-3 mt-4 p-3">
                 <div class="d-flex align-content-center">
-                    <img src="<?php echo ROOT_URL.$_SESSION['user_data']['image']?>" alt="User profile of <?php echo $_SESSION['user_data']['name']?>" class="rounded-circle icon-image ">
+                    <img src="<?php echo ROOT_URL.$item['profileImage']?>" alt="User profile of <?php echo $item['name']?>" class="rounded-circle icon-image ">
                     <div class="align-content-center mt-2 ms-2 d-flex">
-                        <h6 class="me-2"><?php echo $_SESSION['user_data']['name']?></h6>
+                        <h6 class="me-2"><?php echo $item['name']?></h6>
                         <!-- Fuente: https://es.stackoverflow.com/questions/391540/cómo-calcular-tiempo-en-php-cuando-el-formato-es-datetime-->
                         <h6 ><?php echo (new DateTime($item['create_time']))->diff(new DateTime())->h + (new DateTime($item['create_time']))->diff(new DateTime())->days * 24; ?> h</h6>
                     </div>
@@ -110,3 +110,6 @@
     </div>
 
 </div>
+
+
+

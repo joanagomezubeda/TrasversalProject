@@ -25,13 +25,8 @@
                 // Split of name and surname (Like a stringTokenizer)
                 $completeName = explode(' ', $post['completeName']);
                 $name = $completeName[0];
-                $surname = $completeName[1];
+                $surname = $completeName[1].' '.$completeName[2];
 
-                // Split of adress, city y province (Like a stringTokenizer)
-                $completeAddress = explode(',', $post['completeAddress']);
-                $address = $completeAddress[0];
-                $city = $completeAddress[1];
-                $province = $completeAddress[2];
 
                 //Profile image
                 $image = 'assets/userImages/defaultProfile.jpg';
@@ -43,9 +38,9 @@
                 $this->bind(':password', $password);
                 $this->bind(':surname', $surname);
                 $this->bind(':rol', $rol);
-                $this->bind(':address', $address);
-                $this->bind(':city', $city);
-                $this->bind(':province', $province);
+                $this->bind(':address', $post['address']);
+                $this->bind(':city', $post['city']);
+                $this->bind(':province', $post['province']);
                 $this->bind(':image', $image);
                 $this->execute();
 

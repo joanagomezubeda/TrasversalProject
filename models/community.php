@@ -23,8 +23,7 @@
 
         public function getComments($id)
         {
-            $this->query("SELECT * FROM comment WHERE id_publication = $id ORDER BY create_time");
-            //$this->query("SELECT * FROM comment JOIN publication ON comment.id_publication = publication.id WHERE id_publication = $id");
+            $this->query("SELECT comment.*, user.image as profileImage, user.name FROM comment JOIN user ON comment.id_user = user.id WHERE id_publication = 1 ORDER BY comment.create_time DESC");
             $rows = $this->resultSet();
             return($rows);
         }
@@ -86,7 +85,7 @@
                 try {
                     $userId = $_SESSION['user_data']['id'];
                     // Insert into MySQL
-                    $this->query("INSERT INTO publication(description, publication_image,id_user) VALUES(:description,:publication_image, :id_user)");
+                    $this->query("INSERT INTO publication(description, publication_image,id_user, create_time) VALUES(:description,:publication_image, :id_user, CURRENT_TIMESTAMP)");
                     $this->bind(':description', $post['description']);
                     $this->bind(':publication_image', $imageToSave);
                     $this->bind(':id_user', $userId);
@@ -145,7 +144,7 @@
 
                 try {
                     // Insert into MySQL
-                    $this->query("INSERT INTO comment(description, image,id_user, id_publication) VALUES(:description,:image, :id_user, :id_publication)");
+                    $this->query("INSERT INTO comment(description, image,id_user, id_publication, create_time) VALUES(:description,:image, :id_user, :id_publication, CURRENT_TIMESTAMP)");
                     $this->bind(':description', $post['description']);
                     $this->bind(':image', $imageToSave);
                     $this->bind(':id_user', $userId);
@@ -213,7 +212,7 @@
                 try {
 
                     // Insert into MySQL
-                    $this->query("UPDATE publication SET description = :description, publication_image = :publication_image WHERE id = $id");
+                    $this->query("UPDATE publication SET description = :description, publication_image = :publication_image, upadate_time = CURRENT_TIMESTAMP WHERE id = $id");
                     $this->bind(':description', $post['description']);
                     $this->bind(':publication_image', $imageToSave);
                     $this->execute();
