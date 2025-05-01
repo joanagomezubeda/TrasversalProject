@@ -102,7 +102,7 @@
             return $this->single();
         }
 
-        public function update($id = null)
+        public function update($id)
         {
             $this->query("SELECT image FROM user WHERE id = $id");
             $response = $this->single();

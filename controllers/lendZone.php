@@ -12,7 +12,15 @@ class LendZone extends Controller {
         $id = $this->request['id'];
         $viewmodel = new LendZoneModel();
         $viewmodel->confirm($id);
-        header('Location: '.ROOT_URL.'lendZone');
+        header('Location: '.ROOT_URL.'lendZone?page=1');
+    }
+
+    protected function cancel()
+    {
+        $id = $this->request['id'];
+        $viewmodel = new LendZoneModel();
+        $viewmodel->cancel($id);
+        header('Location: '.ROOT_URL.'lendZone?page=1');
     }
 }
 ?>

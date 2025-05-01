@@ -50,7 +50,7 @@
                                 <a href="<?php echo ROOT_URL;?>lendZone?page=1" class="nav-link">Lend Zone</a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?php echo ROOT_URL;?>community" class="nav-link">Community</a>
+                                <a href="<?php echo ROOT_URL;?>community?page=1" class="nav-link">Community</a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?php echo ROOT_URL?>users/profile/<?php echo $_SESSION['user_data']['id'];?>" class="nav-link">My Profile</a>
@@ -122,7 +122,7 @@
                         </div>
                     <?php endif?>
                     <div class="d-flex mx-5 mt-4 justify-content-xl-center justify-content-xxl-start <?php echo ($viewName == 'Community') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
-                        <li><a href="<?php echo ROOT_URL;?>community" class="ms-2 fw-semibold"><i class="bi bi-chat-square-heart-fill fs-5 me-2"></i><span class="span-class">Community</span></a></li>
+                        <li><a href="<?php echo ROOT_URL;?>community?page=1" class="ms-2 fw-semibold"><i class="bi bi-chat-square-heart-fill fs-5 me-2"></i><span class="span-class">Community</span></a></li>
                     </div>
                 </ul>
             </nav>

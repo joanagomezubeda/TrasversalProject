@@ -88,7 +88,7 @@
                    $this->bind(':lend_date', date("Y-m-d"));
                    $this->execute();
                    Messages::setMessage('You had borrow the book!', 'success');
-                   header('Location: ' . ROOT_URL . 'borrow');
+                   header('Location: ' . ROOT_URL . 'borrow?page=1');
                }
 
 

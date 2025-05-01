@@ -133,7 +133,7 @@
                             $this->execute();
                         }
 
-                        header('Location:'.ROOT_URL.'myLibrary');
+                        header('Location:'.ROOT_URL.'myLibrary?page=1');
                     } else {
                         Messages::setMessage('You can only add 50 books to your library!', 'error');
                     }
@@ -221,7 +221,7 @@
                         $this->execute();
                     }
 
-                    header('Location: ' . ROOT_URL.'myLibrary');
+                    header('Location: ' . ROOT_URL.'myLibrary?page=1');
                 } catch (\Exception $e){
                     Messages::setMessage($e->getMessage(), 'error');
                 }

@@ -10,6 +10,7 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Username</th>
             <th scope="col">Email</th>
             <th scope="col text-clamp-oneLine">Complete Adress</th>
             <th scope="col">Action</th>
@@ -20,6 +21,7 @@
             <tr>
                 <th scope="row"><?php echo $item['id']?></th>
                 <td><?php echo $item['name']?></td>
+                <td><?php echo $item['username']?></td>
                 <td><?php echo $item['email']?></td>
                 <?php if (!empty($item['address'])): ?>
                     <td><?php echo $item['address'] ?>, <?php echo $item['city'] ?>, <?php echo $item['province'] ?></td>
@@ -27,8 +29,8 @@
                     <td>Unknown</td>
                 <?php endif; ?>
                 <td>
-                    <a class="btn btn-primary-outline col-12 col-md-12 col-lg-8 col-xl-5 mt-2" href="<?php echo ROOT_URL?>users/profile/<?php echo $item['id']?>">Edit</a>
-                    <button class="btn btn-primary-color shadow col-12 col-md-12 col-lg-8 col-xl-5 mt-2" data-bs-toggle="modal" data-bs-target="#modalToDelete-<?php echo $item['id']?>">Delete</button>
+                    <a class="btn btn-primary-outline col-12 col-md-12 col-lg-8  col-xxl-4 mt-2" href="<?php echo ROOT_URL?>users/profile/<?php echo $item['id']?>">Edit</a>
+                    <button class="btn btn-primary-color shadow col-12 col-md-12 col-lg-8 col-xxl-6 mt-2" data-bs-toggle="modal" data-bs-target="#modalToDelete-<?php echo $item['id']?>">Delete</button>
                 </td>
             </tr>
             <!-- Modal -->

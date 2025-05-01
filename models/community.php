@@ -6,9 +6,29 @@
                 $this->add();
             }
 
-            $this->query('SELECT * FROM publication JOIN user ON publication.id_user = user.id');
+            $elementsPage = 6;
+            $actualPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+            $start = ($actualPage - 1) * $elementsPage;
+            if ($start < 0) {
+                $start = 0;
+            }
+
+            $this->query('SELECT * FROM publication JOIN user ON publication.id_user = user.id  ORDER BY publication.create_time DESC LIMIT :start, :elementsPage');
+            $this->bind(':start', $start);
+            $this->bind(':elementsPage', $elementsPage);
             $rows = $this->resultSet();
-            return($rows);
+
+            $this->query('SELECT COUNT(*) as totalPublication FROM publication JOIN user ON publication.id_user = user.id');
+            $totalPublication = $this->single()['totalPublication'];
+
+            return [
+                'publications' => $rows,
+                'total' => $totalPublication,
+                'page' => $actualPage,
+                'elementsPage' => $elementsPage,
+                'start' => $start
+            ];
         }
 
         public function show($id,$userId)
@@ -98,7 +118,7 @@
 
                 if ($this->lastInsertId()){
                     // Redirect
-                    header('Location:'.ROOT_URL.'community');
+                    header('Location:'.ROOT_URL.'community?page=1');
                 }
 
             }
@@ -158,7 +178,7 @@
 
                 if ($this->lastInsertId()){
                     // Redirect
-                    header('Location:'.ROOT_URL.'community');
+                    header('Location:'.ROOT_URL.'community?page=1');
                 }
 
             }

@@ -38,5 +38,11 @@ class LendZoneModel extends Model {
         $this->query("UPDATE lend SET userConfirmation = 1 WHERE book_id = $id");
         $this->execute();
     }
+
+    public function cancel($id)
+    {
+        $this->query("DELETE FROM lend WHERE book_id = $id");
+        $this->execute();
+    }
 }
 ?>

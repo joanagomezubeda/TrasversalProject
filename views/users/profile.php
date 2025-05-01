@@ -36,7 +36,7 @@
                 <!-- Pàssword -->
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 mt-3 mt-lg-0">
                     <label for="password">Password *</label>
-                    <input type="password" value="************" name="password" class="form-control form-border" id="password" >
+                    <input type="password" placeholder="******************" name="password" class="form-control form-border" id="password" >
                 </div>
             </div>
 

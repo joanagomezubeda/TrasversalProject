@@ -7,7 +7,7 @@
                 <h6><?php echo $item['author'];?></h6>
                 <p class="fw-light">Genre: <?php echo $item['genre']?></p>
                 <div class="d-flex justify-content-center gap-2 flex-sm-row flex-column mt-3">
-                    <a class="btn btn-primary-color shadow col-12 col-lg-6" href="<?php echo ROOT_PATH; ?>borrow/show/<?php echo $item['ID']?>">Show</a>
+                    <a class="btn btn-primary-color shadow col-12 col-lg-6" href="<?php echo ROOT_PATH; ?>lendZone/cancel/<?php echo $item['ID']?>">Cancel</a>
                     <a class="btn btn-confirm shadow col-12 col-lg-6" href="<?php echo ROOT_PATH; ?>lendZone/confirm/<?php echo $item['ID']?>">Confirm</a>
                 </div>
             </div>

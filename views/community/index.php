@@ -17,8 +17,8 @@
         </form>
     </div>
 <?php endif; ?>
-<div class="mt-2">
-    <?php foreach ($viewmodel as $item): ?>
+<div class="mt-2 mb-5">
+    <?php foreach ($viewmodel['publications'] as $item): ?>
         <a href="<?php echo ROOT_URL?>community/show/<?php echo $item['ID']?>" class="text-black text-decoration-none">
             <div class="bg-color shadow rounded-3 mt-4 p-3">
                 <div class="d-flex align-content-center">
@@ -40,3 +40,36 @@
 
 </div>
 
+<?php
+    $totalPages = ceil($viewmodel['total'] / $viewmodel['elementsPage']);
+    $actualPage = $viewmodel['page'];
+
+    $queryParams = $_GET;
+    unset($queryParams['page']);
+    $baseURL = '?' . http_build_query($queryParams);
+
+?>
+
+<nav aria-label="pagination">
+    <ul class="pagination justify-content-center">
+
+        <?php if ($actualPage > 1): ?>
+            <li class="page-item">
+                <a class="page-link" href="<?= $baseURL ?>&page=<?= $actualPage - 1 ?>">Previous</a>
+            </li>
+        <?php endif; ?>
+
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <li class="page-item <?= $i == $actualPage ? 'active' : '' ?>">
+                <a class="page-link" href="<?= $baseURL ?>&page=<?= $i ?>"><?= $i ?></a>
+            </li>
+        <?php endfor; ?>
+
+        <?php if ($actualPage < $totalPages): ?>
+            <li class="page-item">
+                <a class="page-link" href="<?= $baseURL ?>&page=<?= $actualPage + 1 ?>">Next</a>
+            </li>
+        <?php endif; ?>
+
+    </ul>
+</nav>
