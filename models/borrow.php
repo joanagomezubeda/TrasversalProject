@@ -12,14 +12,13 @@
            }
             // Get all books of the user
            $this->query("SELECT *,
-                CASE
-                    WHEN (SELECT 1 FROM lend WHERE borrow_user_id = :userId AND book_id = book.ID) THEN 1
-                    ELSE 0
-                END AS isBorrowed
-                FROM book WHERE id_user != :userId 
-                AND (ID NOT IN (SELECT book_id FROM lend) 
-                OR ID NOT IN (SELECT lend.BOOK_ID FROM lend WHERE return_date > current_date()))
-                LIMIT :start, :elementsPage");
+           CASE
+                WHEN (SELECT 1 FROM lend WHERE borrow_user_id = :userId AND book_id = book.ID) THEN 1
+                ELSE 0
+           END AS isBorrowed FROM book
+           WHERE id_user != :userId AND ( ID NOT IN (SELECT book_id FROM lend) OR ID IN (SELECT book_id FROM lend WHERE borrow_user_id = :userId));
+           LIMIT :start, :elementsPage");
+
            $this->bind(':userId',$userId);
            $this->bind(':start', $start);
            $this->bind(':elementsPage', $elementsPage);
@@ -44,7 +43,14 @@
 
        public function show($id = null)
        {
-           $this->query("SELECT * FROM book WHERE ID = $id");
+           $userId = $_SESSION['user_data']['id'];
+           $this->query("SELECT *,
+                CASE
+                    WHEN (SELECT 1 FROM lend WHERE user_id = :user_id AND book_id = book.ID AND userConfirmation = 1)  THEN 1
+                    ELSE 0
+                END AS isLent FROM book WHERE ID = :id");
+           $this->bind(':user_id', $userId);
+           $this->bind(':id', $id);
            return $this->single();
        }
 
@@ -95,8 +101,6 @@
                    Messages::setMessage('You had borrow the book!', 'success');
                    header('Location: ' . ROOT_URL . 'borrow?page=1');
                }
-
-
 
            } catch (\Exception $e){
                Messages::setMessage('There was a trouble borrowing the book! <i class=" ms-1 bi bi-emoji-frown"></i>', 'error');

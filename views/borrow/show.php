@@ -14,8 +14,12 @@
             <div class="d-flex flex-column flex-md-row gap-4">
                 <?php if ($viewmodel['isSaved']): ?>
                     <!-- Once you save it, its like a copy in your library so you can't borrow it because its yours :) -->
-                    <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-5 col-12" href="<?php echo ROOT_URL?>borrow/delete/<?php echo $viewmodel['book']['ID'] ?>">Delete</a>
-                    <a class="btn btn-secondary-outline shadow mt-lg-3 col-xl-3 col-md-5 col-12" href="<?php echo ROOT_URL?>borrow/delete/<?php echo $viewmodel['book']['ID'] ?>">Edit</a>
+                    <?php if ($viewmodel['book']['isLent']): ?>
+                        <a class="btn btn-primary-outline mt-lg-3 shadow w-100">The book was lent</a>
+                    <?php else: ?>
+                        <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-5 col-12" href="<?php echo ROOT_URL?>borrow/delete/<?php echo $viewmodel['book']['ID'] ?>">Delete</a>
+                        <a class="btn btn-secondary-outline shadow mt-lg-3 col-xl-3 col-md-5 col-12" href="<?php echo ROOT_URL?>borrow/delete/<?php echo $viewmodel['book']['ID'] ?>">Edit</a>
+                    <?php endif;?>
                 <?php else: ?>
                     <?php if($viewmodel['isBorrowed']): ?>
                         <?php if ($viewmodel['isConfirmed']): ?>
@@ -27,8 +31,10 @@
                         <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-6 col-12 " href="<?php echo ROOT_URL?>borrow/borrowBook/<?php echo $viewmodel['book']['ID'] ?>">Borrow</a>
                         <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-5 col-12" href="<?php echo ROOT_URL?>borrow/saveBook/<?php echo $viewmodel['book']['ID'] ?>">Save</a>
                     <?php endif; ?>
+
                 <?php endif; ?>
             </div>
+
         <?php endif; ?>
     </div>
 </div>

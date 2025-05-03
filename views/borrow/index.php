@@ -8,8 +8,12 @@
                 <h6><?php echo $item['author'];?></h6>
                 <p class="text-clamp"><?php echo $item['description'];?></p>
                 <div class="d-flex justify-content-center gap-3 flex-md-row flex-column">
-                    <?php if ($_SESSION['user_data']['address']  && $item['isBorrowed']): ?>
-                        <a class="btn btn-secondary-color shadow col-12 col-md-6 col-xl-6">Pending...</a>
+                    <?php if ($_SESSION['user_data']['address']): ?>
+                        <?php if ($item['isBorrowed']): ?>
+                            <a class="btn btn-secondary-color shadow col-12 col-md-6 col-xl-6">Pending...</a>
+                        <?php else:?>
+                            <a class="btn btn-primary-color shadow col-12 col-xl-6" href="<?php echo ROOT_PATH; ?>borrow/borrowBook/<?=$item['ID']?>">Borrow</a>
+                        <?php endif?>
                     <?php else: ?>
                         <button class="btn btn-primary-color shadow col-12  col-md-6 col-xl-6" data-bs-toggle="modal" data-bs-target="#modalToBorrow-<?php echo $item['ID']?>">Borrow</button>
                     <?php endif; ?>
