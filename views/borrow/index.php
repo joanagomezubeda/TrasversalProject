@@ -7,13 +7,13 @@
                 <h3 class="mt-3 text-clamp-oneLine"><?php echo $item['title'];?></h3>
                 <h6><?php echo $item['author'];?></h6>
                 <p class="text-clamp"><?php echo $item['description'];?></p>
-                <div class="d-flex justify-content-center gap-4 flex-sm-row flex-column">
-                    <?php if ($_SESSION['user_data']['address']): ?>
-                        <a class="btn btn-primary-color shadow col-12 col-xl-6" href="<?php echo ROOT_PATH; ?>borrow/borrowBook/<?=$item['ID']?>">Borrow</a>
+                <div class="d-flex justify-content-center gap-3 flex-md-row flex-column">
+                    <?php if ($_SESSION['user_data']['address']  && $item['isBorrowed']): ?>
+                        <a class="btn btn-secondary-color shadow col-12 col-md-6 col-xl-6">Pending...</a>
                     <?php else: ?>
-                        <button class="btn btn-primary-color shadow col-12 col-xl-6" data-bs-toggle="modal" data-bs-target="#modalToBorrow-<?php echo $item['ID']?>">Borrow</button>
+                        <button class="btn btn-primary-color shadow col-12  col-md-6 col-xl-6" data-bs-toggle="modal" data-bs-target="#modalToBorrow-<?php echo $item['ID']?>">Borrow</button>
                     <?php endif; ?>
-                    <a class="btn btn-primary-color shadow col-12 col-xl-6" href="<?php echo ROOT_PATH; ?>borrow/show/<?=$item['ID']?>">See More</a>
+                    <a class="btn btn-primary-color shadow col-12  col-md-6 col-xl-6" href="<?php echo ROOT_PATH; ?>borrow/show/<?=$item['ID']?>">See More</a>
                 </div>
             </div>
         </div>

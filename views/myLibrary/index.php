@@ -13,11 +13,20 @@
                 <a class="btn btn-primary-color shadow w-100" href="<?php echo ROOT_PATH; ?>borrow/show/<?php echo $item['ID']?>">Show</a>
                 <div class="d-flex justify-content-center gap-4 flex-sm-row flex-column mt-3">
                     <?php if ($item['isBorrowed']):?>
-                        <a class="btn btn-primary-outline shadow w-100" href="<?php echo ROOT_PATH; ?>borrow/unborrow/<?php echo $item['ID']?>">Unborrow</a>
+                        <?php if($item['isConfirmed']):?>
+                            <a class="btn btn-primary-outline shadow w-100" href="<?php echo ROOT_PATH; ?>borrow/unborrow/<?php echo $item['ID']?>">Unborrow</a>
+                        <?php else:?>
+                            <a class="btn btn-primary-outline shadow w-100">Pending...</a>
+                        <?php endif;?>
                     <?php else:?>
-                        <a class="btn btn-secondary-outline shadow w-lg-50 w-100" href="<?php echo ROOT_PATH; ?>myLibrary/edit/<?php echo $item['ID']?>">Edit</a>
-                        <button class="btn btn-primary-outline shadow  w-lg-50 w-100" data-bs-toggle="modal" data-bs-target="#modalToDelete-<?php echo $item['ID']?>">Delete</button>
+                        <?php if ($item['isLent']): ?>
+                            <a class="btn btn-secondary-outline shadow w-100">Lent</a>
+                        <?php else:?>
+                            <a class="btn btn-secondary-outline shadow w-lg-50 w-100" href="<?php echo ROOT_PATH; ?>myLibrary/edit/<?php echo $item['ID']?>">Edit</a>
+                            <button class="btn btn-primary-outline shadow  w-lg-50 w-100" data-bs-toggle="modal" data-bs-target="#modalToDelete-<?php echo $item['ID']?>">Delete</button>
+                        <?php endif;?>
                     <?php endif; ?>
+
                 </div>
             </div>
         </div>
@@ -39,6 +48,7 @@
                 </div>
             </div>
         </div>
+
     <?php endforeach;?>
 
 </div>

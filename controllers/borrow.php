@@ -19,7 +19,8 @@
             }
             $isSavedBook = $viewmodel->isSaved($id, $userId);
             $isBorrowed = $viewmodel->isBorrowed($id, $userId);
-            $this->returnView(['book'=>$book, 'relatedBooks' => $relatedBooks, 'isSaved' => $isSavedBook, 'isBorrowed' => $isBorrowed], true);
+            $isConfirmed = $viewmodel->isConfirmed($id,$userId);
+            $this->returnView(['book'=>$book, 'relatedBooks' => $relatedBooks, 'isSaved' => $isSavedBook, 'isBorrowed' => $isBorrowed, 'isConfirmed' => $isConfirmed], true);
         }
 
         protected function delete()
@@ -35,7 +36,8 @@
         {
             $id = $this->request['id'];
             $viewmodel = new BorrowModel();
-            $viewmodel->unborrowBook($id);
+            $viewmodel->unborrow($id);
+            header('Location:'. ROOT_URL.'borrow');
         }
 
         protected function borrowBook()
@@ -53,15 +55,6 @@
             $id = $this->request['id'];
             $viewmodel = new BorrowModel();
             $viewmodel->saveBook($id, $userId);
-            header('Location: ' . ROOT_URL . 'myLibrary');
-        }
-
-        protected function unsaveBook()
-        {
-            $userId = $_SESSION['user_data']['id'];
-            $id = $this->request['id'];
-            $viewmodel = new BorrowModel();
-            $viewmodel->unsaveBook($id, $userId);
             header('Location: ' . ROOT_URL . 'myLibrary');
         }
 

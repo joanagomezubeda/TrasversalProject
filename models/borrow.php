@@ -11,7 +11,12 @@
                $start = 0;
            }
             // Get all books of the user
-           $this->query("SELECT * FROM book WHERE id_user != :userId 
+           $this->query("SELECT *,
+                CASE
+                    WHEN (SELECT 1 FROM lend WHERE borrow_user_id = :userId AND book_id = book.ID) THEN 1
+                    ELSE 0
+                END AS isBorrowed
+                FROM book WHERE id_user != :userId 
                 AND (ID NOT IN (SELECT book_id FROM lend) 
                 OR ID NOT IN (SELECT lend.BOOK_ID FROM lend WHERE return_date > current_date()))
                 LIMIT :start, :elementsPage");
@@ -105,13 +110,16 @@
            $this->query("SELECT * FROM lend WHERE book_id = $id AND borrow_user_id = $userId");
            $result = $this->single();
 
-           if ($result){
-               return true;
-           } else {
-               return false;
-           }
+           return $result > 0;
        }
 
+       public function isConfirmed($id, $userId)
+       {
+           $this->query("SELECT * FROM lend WHERE userConfirmation = 1 AND borrow_user_id = $userId AND book_id = $id");
+           $result = $this->single();
+
+           return $result > 0;
+       }
 
        public function saveBook($id, $userId)
        {
@@ -137,17 +145,8 @@
            $this->query("SELECT * FROM book WHERE ID = $id AND id_user = $userId");
            $result = $this->single();
 
-           if ($result){
-               return true;
-           } else {
-               return false;
-           }
+           return $result > 0;
        }
 
-       public function unsaveBook($id, $userId)
-       {
-           $this->query("DELETE FROM book WHERE ID = $id AND id_user = $userId");
-           $this->execute();
-       }
    }
 ?>

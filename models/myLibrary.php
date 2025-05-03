@@ -15,16 +15,26 @@
             }
             $this->query("
                 SELECT book.*, 
+                       -- Se ha pedido prestado
                        CASE 
-                           WHEN lend.borrow_user_id = $userId THEN 1 
+                           WHEN lend.borrow_user_id = :user_id THEN 1 
                            ELSE 0 
-                       END AS isBorrowed
+                       END AS isBorrowed,
+                       -- Le han confirmado el libro
+                       CASE
+                            WHEN userConfirmation = 1 THEN 1
+                            ELSE 0
+                       END AS isConfirmed,
+                       -- Es el dueño del libro y lo ha confirmado
+                       CASE
+                            WHEN userConfirmation = 1 AND lend.user_id = :user_id THEN 1
+                            ELSE 0
+                       END AS isLent
                 FROM book 
-                LEFT JOIN lend ON book.ID = lend.book_id AND lend.borrow_user_id = $userId
-                WHERE book.id_user = $userId OR lend.borrow_user_id = $userId
-                GROUP BY book.ID LIMIT :start, :elementsPage
+                LEFT JOIN lend ON book.ID = lend.book_id
+                WHERE book.id_user = :user_id OR lend.borrow_user_id = :user_id LIMIT :start, :elementsPage
             ");
-
+            $this->bind(':user_id', $userId);
             $this->bind(':start', $start);
             $this->bind(':elementsPage', $elementsPage);
             $rows = $this->resultSet();
@@ -34,12 +44,13 @@
                 WHERE book.id_user = $userId OR lend.borrow_user_id = $userId");
             $total = $this->single()['total'];
 
+
             return [
                 'books' => $rows,
                 'total' => $total,
                 'page' => $actualPage,
                 'elementsPage' => $elementsPage,
-                'start' => $start
+                'start' => $start,
             ];
         }
 

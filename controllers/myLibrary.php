@@ -12,7 +12,6 @@
             $this->returnView($viewmodel->index($userId), true);
         }
 
-
         protected function edit()
         {
             if(!isset($_SESSION['is_logged_in'])){

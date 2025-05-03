@@ -7,7 +7,6 @@
     </div>
 
     <div class=" col-sm-12 col-md-12 col-lg-6 col-xl-6 mt-sm-3 ms-lg-5 margin-xsm">
-
         <h1><?php echo $viewmodel['book']['title']?></h1>
         <h6>by <?php echo $viewmodel['book']['author']?></h6>
         <p><?php echo $viewmodel['book']['description']?></p>
@@ -15,10 +14,15 @@
             <div class="d-flex flex-column flex-md-row gap-4">
                 <?php if ($viewmodel['isSaved']): ?>
                     <!-- Once you save it, its like a copy in your library so you can't borrow it because its yours :) -->
-                    <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-5 col-12" href="<?php echo ROOT_URL?>borrow/unsave/<?php echo $viewmodel['book']['ID'] ?>">Unsave</a>
+                    <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-5 col-12" href="<?php echo ROOT_URL?>borrow/delete/<?php echo $viewmodel['book']['ID'] ?>">Delete</a>
+                    <a class="btn btn-secondary-outline shadow mt-lg-3 col-xl-3 col-md-5 col-12" href="<?php echo ROOT_URL?>borrow/delete/<?php echo $viewmodel['book']['ID'] ?>">Edit</a>
                 <?php else: ?>
                     <?php if($viewmodel['isBorrowed']): ?>
-                        <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-6 col-12 " href="<?php echo ROOT_URL?>borrow/unborrow/<?php echo $viewmodel['book']['ID'] ?>">Unborrow</a>
+                        <?php if ($viewmodel['isConfirmed']): ?>
+                            <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-12 " href="<?php echo ROOT_URL?>borrow/unborrow/<?php echo $viewmodel['book']['ID'] ?>">Unborrow</a>
+                        <?php else: ?>
+                            <a class="btn btn-primary-outline mt-lg-3 shadow w-100">Pending...</a>
+                        <?php endif;?>
                     <?php else: ?>
                         <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-6 col-12 " href="<?php echo ROOT_URL?>borrow/borrowBook/<?php echo $viewmodel['book']['ID'] ?>">Borrow</a>
                         <a class="btn btn-primary-color shadow mt-lg-3 col-xl-3 col-md-5 col-12" href="<?php echo ROOT_URL?>borrow/saveBook/<?php echo $viewmodel['book']['ID'] ?>">Save</a>
@@ -73,18 +77,20 @@
                     <?php endforeach; ?>
                 </div>
             </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselOfBooks" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselOfBooks" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         <?php endforeach; ?>
 
     </div>
 
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselOfBooks" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselOfBooks" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+
 </div>
 
 

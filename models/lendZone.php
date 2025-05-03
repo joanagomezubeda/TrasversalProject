@@ -35,7 +35,11 @@ class LendZoneModel extends Model {
 
     public function confirm($id)
     {
-        $this->query("UPDATE lend SET userConfirmation = 1 WHERE book_id = $id");
+        // FUENTE: https://elinawebs.com/como-sumar-y-restar-fechas-con-php-con-strtotime-y-date/ :)
+        $today = date('Y-m-d');
+        $new_date = date('Y-m-d', strtotime($today. "+ 1 month"));
+        $this->query("UPDATE lend SET userConfirmation = 1, return_date = :month_later WHERE book_id = $id");
+        $this->bind(':month_later', $new_date);
         $this->execute();
     }
 

@@ -4,6 +4,7 @@
     --primary-color: rgba(197, 189, 175, 0.5);
     --primary-color-hover: #C5BDAF;
     --geometric-color: #9F988C;
+    --geometric-color-hover: #8a8579;
     --secondary-color: #5E3700;
     --secondary-color-hover: #4f2e00;
     --button-color: #5E3700;
@@ -50,6 +51,23 @@ body{
     color: black;
     border-radius: 5px;
     text-decoration: none;
+}
+
+.btn-secondary-color{
+    background-color: var(--geometric-color) !important;
+    border: 2px solid var(--geometric-color);
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-secondary-color:hover{
+    background-color: var(--geometric-color-hover) !important;
+    border: 2px solid var(--geometric-color-hover);
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all ease 0.2s;
 }
 
 .btn-secondary-outline{
