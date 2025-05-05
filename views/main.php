@@ -49,15 +49,26 @@
                             <li class="nav-item">
                                 <a href="<?php echo ROOT_URL;?>lendZone?page=1" class="nav-link">Lend Zone</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a href="<?php echo ROOT_URL?>users/profile/<?php echo $_SESSION['user_data']['id'];?>" class="nav-link">My Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="<?php echo ROOT_PATH;?>users/logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                <?php else: ?>
+                    <div class=" d-lg-none mt-3">
+                        <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a href="<?php echo ROOT_URL;?>community?page=1" class="nav-link">Community</a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?php echo ROOT_URL?>users/profile/<?php echo $_SESSION['user_data']['id'];?>" class="nav-link">My Profile</a>
+                                <a class="nav-link" aria-current="page" href="<?php echo ROOT_PATH;?>users/login">Log In</a>
                             </li>
-
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="<?php echo ROOT_PATH;?>users/logout">Logout</a>
+                                <a class="nav-link" aria-current="page" href="<?php echo ROOT_PATH;?>users/register">Register</a>
                             </li>
                         </ul>
                     </div>

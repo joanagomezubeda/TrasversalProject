@@ -5,9 +5,10 @@ class DashboardModel extends Model {
         $totalUsers = $this->totalUsers();
         $totalLentBook = $this->totalLentBook();
         $totalBooks = $this->totalBooks();
+        $users = $this->users();
         $totalPublications = $this->totalPublications();
         $totalComments = $this->totalComments();
-        return ['users' => $totalUsers, 'lendBooks' => $totalLentBook, 'books' => $totalBooks, 'publications' => $totalPublications, 'comments' => $totalComments];
+        return ['fiveUsers' => $totalUsers, 'lendBooks' => $totalLentBook, 'books' => $totalBooks, 'publications' => $totalPublications, 'comments' => $totalComments, 'users' => $users];
     }
 
     public function totalUsers()
@@ -16,6 +17,14 @@ class DashboardModel extends Model {
         $rows = $this->resultSet();
         return $rows;
     }
+
+    public function users()
+    {
+        $this->query("SELECT * FROM user ORDER BY create_time DESC  ");
+        $rows = $this->resultSet();
+        return $rows;
+    }
+
     public function totalLentBook()
     {
         $this->query("SELECT *, book.image as book_image FROM lend JOIN book on lend.book_id = book.ID JOIN user ON lend.borrow_user_id = user.id ORDER BY lend_date DESC  LIMIT 5 ");

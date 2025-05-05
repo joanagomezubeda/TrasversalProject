@@ -3,37 +3,43 @@ class Dashboard extends Controller {
     protected function index()
     {
         $viewModel = new DashboardModel();
-        $this->ReturnView($viewModel->index(), true);
+        $this->returnView($viewModel->index(), true);
     }
 
     protected function users()
     {
         $viewModel = new DashboardModel();
-        $this->ReturnView($viewModel->totalUsers(), true);
+        $this->returnView($viewModel->users(), true);
+    }
+
+    protected function totalUsers()
+    {
+        $viewModel = new DashboardModel();
+        $this->returnView($viewModel->totalUsers(), true);
     }
 
     protected function books()
     {
         $viewModel = new DashboardModel();
-        $this->ReturnView($viewModel->totalBooks(), true);
+        $this->returnView($viewModel->totalBooks(), true);
     }
 
     protected function publications()
     {
         $viewModel = new DashboardModel();
-        $this->ReturnView($viewModel->totalPublications(), true);
+        $this->returnView($viewModel->totalPublications(), true);
     }
 
     protected function comments()
     {
         $viewModel = new DashboardModel();
-        $this->ReturnView($viewModel->totalComments(), true);
+        $this->returnView($viewModel->totalComments(), true);
     }
 
     protected function lendBooks()
     {
         $viewModel = new DashboardModel();
-        $this->ReturnView($viewModel->totalLendBooks(), true);
+        $this->returnView($viewModel->totalLendBooks(), true);
     }
 
     protected function editComment()
@@ -43,7 +49,7 @@ class Dashboard extends Controller {
         $viewModel = new DashboardModel();
         $comment = $viewModel->getComment($commentId);
         $edit = $viewModel->editComment($commentId);
-        $this->ReturnView([$edit, 'comment' => $comment], true);
+        $this->returnView([$edit, 'comment' => $comment], true);
     }
 
     protected function editLendBook()
@@ -54,7 +60,7 @@ class Dashboard extends Controller {
         $viewmodel = new DashboardModel();
         $edit = $viewmodel->editLendBook($userId, $bookId, $lendDate);
         $lendBook = $viewmodel->getLendBook($userId, $bookId, $lendDate);
-        $this->ReturnView([$edit, 'lendBook' => $lendBook], true);
+        $this->returnView([$edit, 'lendBook' => $lendBook], true);
     }
 
     protected function editPublication()

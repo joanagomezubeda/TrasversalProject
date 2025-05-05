@@ -77,7 +77,7 @@
                     <h4 class="fw-bold">Last Users</h4>
                     <p>There are <?php echo count($viewmodel['users'])?> new users!</p>
                     <div class="pb-3">
-                        <?php foreach ($viewmodel['users'] as $item): ?>
+                        <?php foreach ($viewmodel['fiveUsers'] as $item): ?>
                             <div class="d-flex align-content-center mt-3">
                                 <img src="<?php echo $item['image']?>" class="img-fluid icon-image rounded-5 border" alt="<?php echo $item['name']?>">
                                 <div>
