@@ -1,4 +1,4 @@
-<div class="row d-flex justify-content-sm-center justify-content-lg-start mt-4">
+<div class="row d-flex justify-content-sm-center justify-content-lg-start min-vh-100">
     <?php foreach ($viewmodel['books'] as $item): ?>
         <div class="col-md-9 col-lg-6 col-xl-6 col-xxl-4 mb-4">
             <div class="shadow rounded-4 bg-color py-4 px-4">
@@ -44,7 +44,7 @@ $baseURL = '?' . http_build_query($queryParams);
 
 ?>
 
-<nav aria-label="pagination">
+<nav aria-label="pagination bottom-0">
     <ul class="pagination justify-content-center">
 
         <?php if ($actualPage > 1): ?>

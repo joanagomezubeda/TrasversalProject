@@ -1,8 +1,25 @@
-<div class="d-flex justify-content-between ">
-    <button class="btn btn-primary-color shadow "><i class="bi bi-funnel-fill"></i></button>
-    <a class="btn btn-primary-color shadow me-4 " href="<?php echo ROOT_PATH; ?>myLibrary/add">Add a new book</a>
-</div>
-<div class="row d-flex justify-content-sm-center justify-content-lg-start mt-4">
+
+<div class="row d-flex justify-content-sm-center justify-content-lg-start min-vh-100">
+
+    <div class="row d-flex justify-content-center justify-content-lg-between mb-4 ">
+        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="GET" class="col-12 col-md-9 col-lg-2">
+            <input type="hidden" name="page" value="<?php echo isset($_GET['page']) ? $_GET['page'] : 1; ?>">
+            <select name="filterByGenre" id="filterByGenre" class="form-select" onchange="this.form.submit()">
+                <option value="" <?php echo empty($viewmodel['selectedGenre']) ? 'selected' : ''; ?>>
+                    All Books
+                </option>
+                <?php foreach ($viewmodel['genres'] as $item): ?>
+                    <option value="<?php echo $item['genre']; ?>"
+                        <?php echo ($viewmodel['selectedGenre'] === $item['genre']) ? 'selected' : ''; ?>>
+                        <?php echo $item['genre']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </form>
+
+        <a class="btn btn-primary-color shadow col-12 col-md-9 col-lg-2 mt-3 mt-lg-0 ms-4 ms-sm-0" href="<?php echo ROOT_PATH; ?>myLibrary/add">Add a new book</a>
+    </div>
+
     <?php foreach ($viewmodel['books'] as $item): ?>
         <div class="col-md-9 col-lg-6 col-xl-6 col-xxl-4 mb-4">
             <div class="shadow rounded-4 bg-color py-4 px-4">
@@ -64,7 +81,7 @@
 
 ?>
 
-<nav aria-label="pagination">
+<nav aria-label="pagination bottom-0">
     <ul class="pagination justify-content-center">
 
         <?php if ($actualPage > 1): ?>
@@ -87,4 +104,3 @@
 
     </ul>
 </nav>
-

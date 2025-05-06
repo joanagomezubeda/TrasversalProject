@@ -32,7 +32,7 @@
                 $image = 'assets/userImages/defaultProfile.jpg';
 
                 // Insert into MySQL
-                $this->query('INSERT INTO user(name, email, password, surname, rol, image, address, city, province, username) VALUES(:name, :email, :password, :surname, :rol, :image, :address, :city, :province, :username)');
+                $this->query('INSERT INTO user(name, email, password, surname, rol, image, address, city, province, username, create_time) VALUES(:name, :email, :password, :surname, :rol, :image, :address, :city, :province, :username, CURRENT_TIMESTAMP)');
                 $this->bind(':name', $name);
                 $this->bind(':email', $post['email']);
                 $this->bind(':password', $password);
@@ -169,7 +169,7 @@
                 // Insert into MySQL
                 try {
                     $this->query("UPDATE user SET name = :name, surname = :surname, email = :email, password = :password, 
-                    address = :address, city = :city, province = :province, rol = :rol, image = :image, username = :username WHERE id = :id");
+                    address = :address, city = :city, province = :province, rol = :rol, image = :image, username = :username, update_time = CURRENT_TIMESTAMP WHERE id = :id");
                     $this->bind(':name', $name);
                     $this->bind(':email', $post['email']);
                     $this->bind(':image', $imageToSave);

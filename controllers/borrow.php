@@ -4,7 +4,8 @@
         protected function index()
         {
             $viewmodel = new BorrowModel();
-            $this->returnView($viewmodel->index(), true);
+            $selectedGenre = isset($_GET['filterByGenre']) && $_GET['filterByGenre'] !== '' ? $_GET['filterByGenre'] : null;
+            $this->returnView($viewmodel->index($selectedGenre), true);
         }
 
         protected function show()

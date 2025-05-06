@@ -13,14 +13,17 @@ class LendZoneModel extends Model {
             $start = 0;
         }
 
+
         $this->query("SELECT * FROM book JOIN lend ON book.id = lend.book_id WHERE user_id = :userId AND userConfirmation = 0 LIMIT :start, :elementsPage");
         $this->bind(':start', $start);
         $this->bind(':elementsPage', $elementsPage);
         $this->bind(':userId', $userId );
         $rows = $this->resultSet();
 
-        $this->query("SELECT COUNT(*) as total FROM book JOIN lend ON book.id = lend.book_id WHERE user_id = :userId AND userConfirmation = 0");
+        $this->query("SELECT COUNT(*) as total FROM book JOIN lend ON book.id = lend.book_id WHERE user_id = :userId AND userConfirmation = 0 ");
         $this->bind(':userId', $userId );
+
+
         $total = $this->single()['total'];
 
         return [
@@ -28,17 +31,19 @@ class LendZoneModel extends Model {
             'total' => $total,
             'page' => $actualPage,
             'elementsPage' => $elementsPage,
-            'start' => $start
+            'start' => $start,
+
         ];
 
     }
+
 
     public function confirm($id)
     {
         // FUENTE: https://elinawebs.com/como-sumar-y-restar-fechas-con-php-con-strtotime-y-date/ :)
         $today = date('Y-m-d');
         $new_date = date('Y-m-d', strtotime($today. "+ 1 month"));
-        $this->query("UPDATE lend SET userConfirmation = 1, return_date = :month_later WHERE book_id = $id");
+        $this->query("UPDATE lend SET userConfirmation = 1, return_date = :month_later, update_time = CURRENT_TIMESTAMP WHERE book_id = $id");
         $this->bind(':month_later', $new_date);
         $this->execute();
     }

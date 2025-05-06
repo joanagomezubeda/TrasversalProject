@@ -3,16 +3,25 @@
     class MyLibraryModel extends Model {
 
 
-        public function index($userId)
+        public function index($userId, $selectedGenre)
         {
             $elementsPage = 6;
             $actualPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
             $start = ($actualPage - 1) * $elementsPage;
 
+
+
             if ($start < 0) {
                 $start = 0;
             }
+
+            if (!empty($selectedGenre)){
+                $condition = 'AND genre = :selected_genre';
+            } else {
+                $condition = '';
+            }
+
             $this->query("
                 SELECT book.*, 
                        -- Se ha pedido prestado
@@ -32,26 +41,41 @@
                        END AS isLent
                 FROM book 
                 LEFT JOIN lend ON book.ID = lend.book_id
-                WHERE book.id_user = :user_id OR lend.borrow_user_id = :user_id LIMIT :start, :elementsPage
+                WHERE (book.id_user = :user_id OR lend.borrow_user_id = :user_id) $condition LIMIT :start, :elementsPage
             ");
+
             $this->bind(':user_id', $userId);
             $this->bind(':start', $start);
             $this->bind(':elementsPage', $elementsPage);
+            $this->bind(':selected_genre', $selectedGenre);
             $rows = $this->resultSet();
 
             $this->query("SELECT COUNT(*) as total FROM book 
                 LEFT JOIN lend ON book.ID = lend.book_id AND lend.borrow_user_id = $userId
-                WHERE book.id_user = $userId OR lend.borrow_user_id = $userId");
+                WHERE (book.id_user = $userId OR lend.borrow_user_id = $userId) $condition");
+
+            if (!empty($selectedGenre)) {
+                $this->bind(':selected_genre', $selectedGenre);
+            }
             $total = $this->single()['total'];
 
-
+            $genres = $this->getGenres();
             return [
                 'books' => $rows,
                 'total' => $total,
                 'page' => $actualPage,
                 'elementsPage' => $elementsPage,
                 'start' => $start,
+                'genres' => $genres,
+                'selectedGenre' => $selectedGenre,
             ];
+        }
+
+        public function getGenres()
+        {
+            $this->query("SELECT DISTINCT genre FROM book ");
+            $rows = $this->resultSet();
+            return $rows;
         }
 
         public function edit($id = null)
@@ -117,8 +141,8 @@
                         $lendTheBook = $post['lendTheBook'];
                         $userId = $_SESSION['user_data']['id'];
                         // Insert into MySQL
-                        $this->query("INSERT INTO book(title, description, author, editorial, genre, image,toLend,id_user) VALUES(:title, :description, 
-                     :author, :editorial, :genre ,:image,:toLend, :id_user)");
+                        $this->query("INSERT INTO book(title, description, author, editorial, genre, image,toLend,id_user,create_time) VALUES(:title, :description, 
+                     :author, :editorial, :genre ,:image,:toLend, :id_user, CURRENT_TIMESTAMP)");
                         $this->bind(':title', $post['title']);
                         $this->bind(':description', $post['description']);
                         $this->bind(':author', $post['author']);
@@ -214,7 +238,7 @@
                     // Variable of the select of the form in HTML
                     $lendTheBook = $post['lendTheBook'];
                     $this->query("UPDATE book SET title = :title, description = :description, author = :author, 
-                    editorial = :editorial, genre = :genre, image = :image, toLend = :toLend WHERE id = :id");
+                    editorial = :editorial, genre = :genre, image = :image, toLend = :toLend, update_time = CURRENT_TIMESTAMP WHERE id = :id");
                     $this->bind(':title', $post['title']);
                     $this->bind(':description', $post['description']);
                     $this->bind(':image', $imageToSave);

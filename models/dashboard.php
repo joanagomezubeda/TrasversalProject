@@ -120,7 +120,7 @@ class DashboardModel extends Model {
 
             // Insert into MySQL
             try {
-                $this->query("UPDATE comment SET  description = :description, image = :image WHERE ID = :id");
+                $this->query("UPDATE comment SET  description = :description, image = :image, update_time = CURRENT_TIMESTAMP WHERE ID = :id");
 
                 $this->bind(':description', $post['description']);
                 $this->bind(':image', $imageToSave);
@@ -160,7 +160,7 @@ class DashboardModel extends Model {
             // Insert into MySQL
             try {
                 $this->query("UPDATE lend SET user_id = :user_id, book_id = :book_id, lend_date = :lend_date, 
-                return_date = :return_date, borrow_user_id = :borrow_user_id, userConfirmation = :userConfirmation WHERE user_id = :user_id AND book_id = :book_id AND lend_date = :lend_date");
+                return_date = :return_date, borrow_user_id = :borrow_user_id, userConfirmation = :userConfirmation, update_time = CURRENT_TIMESTAMP WHERE user_id = :user_id AND book_id = :book_id AND lend_date = :lend_date");
 
                 $this->bind(':user_id', $userId);
                 $this->bind(':book_id', $bookId);
@@ -236,7 +236,7 @@ class DashboardModel extends Model {
 
             // Insert into MySQL
             try {
-                $this->query("UPDATE publication SET  description = :description, publication_image = :image WHERE ID = :id");
+                $this->query("UPDATE publication SET  description = :description, publication_image = :image, update_time = CURRENT_TIMESTAMP WHERE ID = :id");
 
                 $this->bind(':description', $post['description']);
                 $this->bind(':image', $imageToSave);

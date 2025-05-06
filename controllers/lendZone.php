@@ -4,7 +4,7 @@ class LendZone extends Controller {
     {
         $userId = $_SESSION['user_data']['id'];
         $viewModel = new LendZoneModel();
-        $this->ReturnView($viewModel->index($userId), true);
+        $this->returnView($viewModel->index($userId), true);
     }
 
     protected function confirm()

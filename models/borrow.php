@@ -1,6 +1,6 @@
 <?php
    class BorrowModel extends model{
-       public function index()
+       public function index($selectedGenre)
        {
            $userId = $_SESSION['user_data']['id'];
            $elementsPage = 6;
@@ -10,25 +10,37 @@
            if ($start < 0) {
                $start = 0;
            }
+
+           if (!empty($selectedGenre)){
+               $condition = 'AND genre = :selected_genre';
+           } else {
+               $condition = '';
+           }
             // Get all books of the user
            $this->query("SELECT *,
            CASE
                 WHEN (SELECT 1 FROM lend WHERE borrow_user_id = :userId AND book_id = book.ID) THEN 1
                 ELSE 0
            END AS isBorrowed FROM book
-           WHERE id_user != :userId AND ( ID NOT IN (SELECT book_id FROM lend) OR ID IN (SELECT book_id FROM lend WHERE borrow_user_id = :userId));
-           LIMIT :start, :elementsPage");
+           WHERE id_user != :userId AND ( ID NOT IN (SELECT book_id FROM lend) OR ID IN (SELECT book_id FROM lend WHERE borrow_user_id = :userId))
+           $condition LIMIT :start, :elementsPage");
 
            $this->bind(':userId',$userId);
            $this->bind(':start', $start);
            $this->bind(':elementsPage', $elementsPage);
+           $this->bind(':selected_genre', $selectedGenre);
            $rows = $this->resultSet();
 
            // Count them
            $this->query("SELECT COUNT(*) AS total FROM book WHERE id_user != :userId 
             AND (ID NOT IN (SELECT book_id FROM lend) 
-            OR ID NOT IN (SELECT lend.BOOK_ID FROM lend WHERE return_date > CURRENT_DATE()))");
+            OR ID NOT IN (SELECT lend.BOOK_ID FROM lend WHERE return_date > CURRENT_DATE())) $condition");
            $this->bind(':userId', $userId);
+
+           if (!empty($selectedGenre)) {
+               $this->bind(':selected_genre', $selectedGenre);
+           }
+
            $total = $this->single()['total'];
 
            return [
@@ -36,10 +48,18 @@
                'total' => $total,
                'page' => $actualPage,
                'elementsPage' => $elementsPage,
-               'start' => $start
+               'start' => $start,
+               'selectedGenre' => $selectedGenre,
+               'genres' => $this->getGenres()
            ];
        }
 
+       public function getGenres()
+       {
+           $this->query("SELECT DISTINCT genre FROM book ");
+           $rows = $this->resultSet();
+           return $rows;
+       }
 
        public function show($id = null)
        {
@@ -131,7 +151,7 @@
            $result = $this->single();
 
            if ($result > 0){
-               $this->query("INSERT INTO book(title, description, author, editorial, genre, image, id_user) VALUES (:title, :description, :author, :editorial, :genre, :image, :id_user)");
+               $this->query("INSERT INTO book(title, description, author, editorial, genre, image, id_user, create_time) VALUES (:title, :description, :author, :editorial, :genre, :image, :id_user, CURRENT_TIMESTAMP)");
                $this->bind(':title', $result['title']);
                $this->bind(':description', $result['description']);
                $this->bind(':author', $result['author']);

@@ -7,9 +7,11 @@
                 header('Location: '.ROOT_URL);
             }
 
+
             $userId = $_SESSION['user_data']['id'];
             $viewmodel = new MyLibraryModel();
-            $this->returnView($viewmodel->index($userId), true);
+            $selectedGenre = isset($_GET['filterByGenre']) && $_GET['filterByGenre'] !== '' ? $_GET['filterByGenre'] : null;
+            $this->returnView($viewmodel->index($userId, $selectedGenre), true);
         }
 
         protected function edit()
