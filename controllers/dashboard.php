@@ -44,6 +44,9 @@ class Dashboard extends Controller {
 
     protected function editComment()
     {
+        if(!isset($_SESSION['is_logged_in']) && $_SESSION['user_data']['rol'] === 'user'){
+            header('Location: '.ROOT_URL);
+        }
 
         $commentId = $this->request['id'];
         $viewModel = new DashboardModel();
@@ -54,6 +57,10 @@ class Dashboard extends Controller {
 
     protected function editLendBook()
     {
+        if(!isset($_SESSION['is_logged_in']) && $_SESSION['user_data']['rol'] === 'user'){
+            header('Location: '.ROOT_URL);
+        }
+
         $userId = $this->request['id'];
         $bookId = $this->request['book_id'];
         $lendDate = $this->request['date'];
@@ -65,6 +72,10 @@ class Dashboard extends Controller {
 
     protected function editPublication()
     {
+        if(!isset($_SESSION['is_logged_in']) && $_SESSION['user_data']['rol'] === 'user'){
+            header('Location: '.ROOT_URL);
+        }
+
         $id = $this->request['id'];
         $viewmodel = new DashboardModel();
         $edit = $viewmodel->editPublication($id);
@@ -74,7 +85,7 @@ class Dashboard extends Controller {
 
     protected function deleteUser()
     {
-        if(!isset($_SESSION['is_logged_in'])){
+        if(!isset($_SESSION['is_logged_in']) && $_SESSION['user_data']['rol'] === 'user'){
             header('Location: '.ROOT_URL);
         }
 
@@ -86,9 +97,10 @@ class Dashboard extends Controller {
 
     protected function deleteBook()
     {
-        if(!isset($_SESSION['is_logged_in'])){
+        if(!isset($_SESSION['is_logged_in']) && $_SESSION['user_data']['rol'] === 'user'){
             header('Location: '.ROOT_URL);
         }
+
 
         $id = $this->request['id'];
         $viewmodel = new DashboardModel();
@@ -98,7 +110,7 @@ class Dashboard extends Controller {
 
     protected function deletePublication()
     {
-        if(!isset($_SESSION['is_logged_in'])){
+        if(!isset($_SESSION['is_logged_in']) && $_SESSION['user_data']['rol'] === 'user'){
             header('Location: '.ROOT_URL);
         }
 
@@ -110,7 +122,7 @@ class Dashboard extends Controller {
 
     protected function deleteComment()
     {
-        if(!isset($_SESSION['is_logged_in'])){
+        if(!isset($_SESSION['is_logged_in']) && $_SESSION['user_data']['rol'] === 'user'){
             header('Location: '.ROOT_URL);
         }
 
@@ -122,7 +134,7 @@ class Dashboard extends Controller {
 
     protected function deleteLendBook()
     {
-        if(!isset($_SESSION['is_logged_in'])){
+        if(!isset($_SESSION['is_logged_in']) && $_SESSION['user_data']['rol'] === 'user'){
             header('Location: '.ROOT_URL);
         }
 

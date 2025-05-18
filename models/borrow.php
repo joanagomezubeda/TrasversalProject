@@ -2,6 +2,10 @@
    class BorrowModel extends model{
        public function index($selectedGenre)
        {
+           if (!isset($_SESSION['user_data']) || !isset($_SESSION['user_data']['id'])) {
+               return [];
+           }
+
            $userId = $_SESSION['user_data']['id'];
            $elementsPage = 6;
            $actualPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;

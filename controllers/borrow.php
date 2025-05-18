@@ -10,6 +10,10 @@
 
         protected function show()
         {
+            if(!isset($_SESSION['is_logged_in'])){
+                header('Location: '.ROOT_URL);
+            }
+
             $id = $this->request['id'];
             $userId = $_SESSION['user_data']['id'];
             $viewmodel = new BorrowModel();
@@ -26,6 +30,10 @@
 
         protected function delete()
         {
+            if(!isset($_SESSION['is_logged_in'])){
+                header('Location: '.ROOT_URL);
+            }
+
             $id = $this->request['id'];
             $viewmodel = new BorrowModel();
             $viewmodel->delete($id);
@@ -35,6 +43,10 @@
 
         protected function unborrow()
         {
+            if(!isset($_SESSION['is_logged_in'])){
+                header('Location: '.ROOT_URL);
+            }
+
             $id = $this->request['id'];
             $viewmodel = new BorrowModel();
             $viewmodel->unborrow($id);
@@ -43,6 +55,10 @@
 
         protected function borrowBook()
         {
+            if(!isset($_SESSION['is_logged_in'])){
+                header('Location: '.ROOT_URL);
+            }
+
             $userId = $_SESSION['user_data']['id'];
             $id = $this->request['id'];
             $viewmodel = new BorrowModel();
@@ -52,6 +68,10 @@
 
         protected function saveBook()
         {
+            if(!isset($_SESSION['is_logged_in'])){
+                header('Location: '.ROOT_URL);
+            }
+
             $userId = $_SESSION['user_data']['id'];
             $id = $this->request['id'];
             $viewmodel = new BorrowModel();

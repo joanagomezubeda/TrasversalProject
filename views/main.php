@@ -41,9 +41,6 @@
                                 <a href="<?php echo ROOT_URL;?>" class="nav-link">Explore</a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?php echo ROOT_URL;?>borrow?page=1" class="nav-link">Borrow</a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="<?php echo ROOT_URL;?>myLibrary?page=1" class="nav-link">My Library</a>
                             </li>
 
@@ -63,6 +60,12 @@
                     <div class=" d-lg-none mt-3">
                         <ul class="navbar-nav">
                             <li class="nav-item">
+                                <a href="<?php echo ROOT_URL;?>home" class="nav-link">Explore</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?php echo ROOT_URL;?>borrow?page=1" class="nav-link">Borrow</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="<?php echo ROOT_URL;?>community?page=1" class="nav-link">Community</a>
                             </li>
                             <li class="nav-item">
@@ -74,12 +77,6 @@
                         </ul>
                     </div>
                 <?php endif; ?>
-
-                <form class="d-flex ms-auto" role="search">
-                    <input class="form-control me-2 primary-border-color " type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-primary-outline" type="submit">Search</button>
-                </form>
-
             </div>
         </div>
     </nav>
@@ -123,9 +120,6 @@
                                 <li><a href="<?php echo ROOT_URL;?>dashboard" class="ms-2 fw-semibold"><i class="bi bi-person-heart fs-5 me-2"></i><span class="span-class">Dashboard</span></a></li>
                             </div>
                         <?php endif;?>
-                        <div class="d-flex mx-5 mt-4 justify-content-xl-center justify-content-xxl-start <?php echo ($viewName == 'Borrow') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
-                            <li><a href="<?php echo ROOT_URL;?>borrow?page=1" class="ms-2 fw-semibold"><i class="bi bi-search-heart-fill fs-5 me-2"></i><span class="span-class">Borrow</span></a></li>
-                        </div>
                         <div class="d-flex mx-5 mt-4 justify-content-xl-center justify-content-xxl-start <?php echo ($viewName == 'MyLibrary') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
                             <li><a href="<?php echo ROOT_URL;?>myLibrary?page=1" class="ms-2 fw-semibold"><i class="bi bi-suit-heart-fill fs-5 me-2"></i><span class="span-class">My Library</span></a></li>
                         </div>
@@ -133,6 +127,9 @@
                             <li><a href="<?php echo ROOT_URL;?>lendZone?page=1" class="ms-2 fw-semibold"><i class="bi bi-postage-heart-fill fs-5 me-2"></i><span class="span-class">Lend Zone</span></a></li>
                         </div>
                     <?php endif?>
+                    <div class="d-flex mx-5 mt-4 justify-content-xl-center justify-content-xxl-start <?php echo ($viewName == 'Borrow') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
+                        <li><a href="<?php echo ROOT_URL;?>borrow?page=1" class="ms-2 fw-semibold"><i class="bi bi-search-heart-fill fs-5 me-2"></i><span class="span-class">Borrow</span></a></li>
+                    </div>
                     <div class="d-flex mx-5 mt-4 justify-content-xl-center justify-content-xxl-start <?php echo ($viewName == 'Community') ? 'bg-white shadow p-2 rounded-3' : ''; ?>">
                         <li><a href="<?php echo ROOT_URL;?>community?page=1" class="ms-2 fw-semibold"><i class="bi bi-chat-square-heart-fill fs-5 me-2"></i><span class="span-class">Community</span></a></li>
                     </div>

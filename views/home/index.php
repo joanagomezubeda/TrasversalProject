@@ -55,11 +55,8 @@
         <h3 class="fw-bold">Discover Our Book Lending Service</h3>
         <p>Explore a wide range of genres and borrow books easily from our extensive collection. Enjoy the convenience of reading your favorite books from the comfort of your home.</p>
 
-        <?php if (isset($_SESSION['is_logged_in'])): ?>
             <a class="btn btn-primary-color shadow rounded-2 py-2 col-xl-3 col-md-12 col-12" href="<?php ROOT_URL?>borrow">Learn More</a>
-        <?php else:?>
-            <button class="btn btn-primary-color col-xl-3 col-md-12 col-12" data-bs-toggle="modal" data-bs-target="#modalToLoggin">Learn More</button>
-        <?php endif; ?>
+
     </div>
 </div>
 
@@ -94,11 +91,7 @@
         <p>Welcome to the Community Zone, where book lovers like you come together to share their thoughts,
             ideas, and experiences about their favorite reads. This is more than just a section of our website—it's a
             vibrant social space for bibliophiles to connect, explore, and inspire one another.</p>
-        <?php if (isset($_SESSION['is_logged_in'])): ?>
-            <a class="btn btn-primary-color col-xl-3 col-md-12 col-12" href="<?php ROOT_URL?>community">Learn More</a>
-        <?php else:?>
-            <button class="btn btn-primary-color col-xl-3 col-md-12 col-12" data-bs-toggle="modal" data-bs-target="#modalToLoggin">Learn More</button>
-        <?php endif; ?>
+        <a class="btn btn-primary-color col-xl-3 col-md-12 col-12" href="<?php ROOT_URL?>community">Learn More</a>
     </div>
 </div>
 

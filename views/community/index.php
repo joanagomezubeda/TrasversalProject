@@ -16,6 +16,14 @@
             </div>
         </form>
     </div>
+<?php else: ?>
+    <div class="me-3 mt-4">
+        <div class="bg-color p-3 rounded-4 shadow ">
+            <h3 class="fw-bold">Want to join the conversation?</h3>
+            <p>Log in now to leave a comment and be part of the community.</p>
+            <a class="btn btn-primary-color col-xl-3 col-md-12 col-12" href="<?php ROOT_URL?>users/login">Log In to Comment</a>
+        </div>
+    </div>
 <?php endif; ?>
 <div class="mt-2 mb-5">
     <?php foreach ($viewmodel['publications'] as $item): ?>

@@ -92,8 +92,23 @@
                     <img src="<?php echo ROOT_URL.$item['profileImage']?>" alt="User profile of <?php echo $item['username']?>" class="rounded-circle icon-image ">
                     <div class="align-content-center mt-2 ms-2 d-flex">
                         <h6 class="me-2"><?php echo $item['username']?></h6>
-                        <!-- Fuente: https://es.stackoverflow.com/questions/391540/cómo-calcular-tiempo-en-php-cuando-el-formato-es-datetime-->
-                        <h6 ><?php echo (new DateTime($item['create_time']))->diff(new DateTime())->h + (new DateTime($item['create_time']))->diff(new DateTime())->days * 24; ?> h</h6>
+                        <!-- Fuente: https://es.stackoverflow.com/questions/391540/cómo-calcular-tiempo-en-php-cuando-el-formato-es-datetime
+                            https://stackoverflow.com/questions/53277944/how-to-set-000000-for-datetime -->
+                        <h6 >
+                            <?php
+                                $diff = (new DateTime($item['create_time']))->diff(new DateTime());
+
+                                if ($diff->days >= 7){
+                                    echo (new DateTime($item['create_time']))->format('j M');
+                                } else if ($diff->days >= 1){
+                                    echo $diff->days." Days";
+                                } else if ($diff->h >= 1){
+                                    echo $diff->h." Hours";
+                                } else {
+                                    echo $diff->i." Minutes";
+                                }
+                            ?>
+                        </h6>
                     </div>
 
                 </div>

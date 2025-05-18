@@ -1,5 +1,5 @@
 
-<div class="row d-flex justify-content-sm-center justify-content-lg-start min-vh-100">
+<div class="row d-flex justify-content-sm-center justify-content-lg-start">
 
     <div class="row d-flex justify-content-center justify-content-lg-between mb-4 ">
         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="GET" class="col-12 col-md-9 col-lg-2">
